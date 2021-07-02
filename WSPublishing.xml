@@ -45,8 +45,26 @@
         </TenantWebService>
         <TenantWebService>
             <ObjectType>Page</ObjectType>
+            <ServiceName>SalesInvoiceLine</ServiceName>
+            <ObjectID>6403</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
             <ServiceName>PurchaseInvoiceHeader</ServiceName>
             <ObjectID>51</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
+            <ServiceName>PurchaseInvoiceLine</ServiceName>
+            <ObjectID>6405</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Query</ObjectType>
+            <ServiceName>CustomerPaymentsQuery</ServiceName>
+            <ObjectID>64051</ObjectID>
             <Published>true</Published>
         </TenantWebService>
     </TenantWebServiceCollection>
