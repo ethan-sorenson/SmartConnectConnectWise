@@ -77,3 +77,35 @@ pageextension 64053 SCCWItemCard extends "Item Card"
             CWEdit := true;
     end;
 }
+
+pageextension 64054 SCCWLocationCard extends "Location Card"
+{
+    layout
+    {
+        addlast(General)
+        {
+            field("ConnectWise Id"; rec."ConnectWise Id")
+            {
+                ApplicationArea = All;
+                Caption = 'ConnectWise Id';
+                ToolTip = 'ConnectWise Unique Identifier';
+            }
+        }
+    }
+}
+
+pageextension 64055 SCCWBinsList extends "Bins"
+{
+    layout
+    {
+        addafter(Description)
+        {
+            field("ConnectWise Id"; rec."ConnectWise Id")
+            {
+                ApplicationArea = All;
+                Caption = 'ConnectWise Id';
+                ToolTip = 'ConnectWise Unique Identifier';
+            }
+        }
+    }
+}

@@ -19,3 +19,25 @@ tableextension 64052 SCCWVendorTable extends "Vendor"
         }
     }
 }
+
+tableextension 64053 SCCWLocationTable extends "Location"
+{
+    fields
+    {
+        field(64051; "ConnectWise Id"; Text[10])
+        {
+            Caption = 'ConnectWise Id';
+        }
+    }
+}
+
+tableextension 64054 SCCWBinTable extends "Bin"
+{
+    fields
+    {
+        field(64051; "ConnectWise Id"; Text[10])
+        {
+            Caption = 'ConnectWise Id';
+        }
+    }
+}

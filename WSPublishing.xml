@@ -39,6 +39,30 @@
         </TenantWebService>
         <TenantWebService>
             <ObjectType>Page</ObjectType>
+            <ServiceName>LocationCard</ServiceName>
+            <ObjectID>5703</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
+            <ServiceName>Bins</ServiceName>
+            <ObjectID>7302</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
+            <ServiceName>ItemJournal</ServiceName>
+            <ObjectID>40</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
+            <ServiceName>SalesJournal</ServiceName>
+            <ObjectID>253</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
             <ServiceName>SalesInvoiceHeader</ServiceName>
             <ObjectID>43</ObjectID>
             <Published>true</Published>
@@ -64,6 +88,18 @@
         <TenantWebService>
             <ObjectType>Query</ObjectType>
             <ServiceName>CustomerPaymentsQuery</ServiceName>
+            <ObjectID>64051</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Query</ObjectType>
+            <ServiceName>LocationBinsQuery</ServiceName>
+            <ObjectID>64052</ObjectID>
+            <Published>true</Published>
+        </TenantWebService>
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
+            <ServiceName>SCCWDimensionValues</ServiceName>
             <ObjectID>64051</ObjectID>
             <Published>true</Published>
         </TenantWebService>
