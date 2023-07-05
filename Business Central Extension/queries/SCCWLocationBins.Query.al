@@ -2,7 +2,7 @@ query 64052 LocationBinsQuery
 {
     QueryType = API;
     APIPublisher = 'eOneSolutions';
-    APIGroup = 'ES';
+    APIGroup = 'ConnectWise';
     APIVersion = 'v2.0';
     EntityName = 'LocationBinsQuery';
     EntitySetName = 'LocationBinsQuery';

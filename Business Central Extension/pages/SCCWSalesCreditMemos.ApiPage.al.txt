@@ -1,0 +1,290 @@
+page 64058 "SSCW - Sales Credit Memos"
+{
+    APIVersion = 'v2.0';
+    APIPublisher = 'eOneSolutions';
+    APIGroup = 'ConnectWise';
+    EntityCaption = 'Sales Credit Memo';
+    EntitySetCaption = 'Sales Credit Memos';
+    ChangeTrackingAllowed = true;
+    DelayedInsert = true;
+    EntityName = 'salesCreditMemo';
+    EntitySetName = 'salesCreditMemos';
+    ODataKeyFields = SystemId;
+    PageType = API;
+    SourceTable = "Sales Header";
+    SourceTableView = WHERE("Document Type" = FILTER("Credit Memo"));
+    Extensible = true;
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field(id; rec.SystemId) { Editable = false; }
+                field(number; rec."No.") { }
+                field(externalDocumentNumber; rec."External Document No.") { }
+                field(documentDate; rec."Document Date")
+                {
+                    trigger OnValidate()
+                    begin
+                        DocumentDateVar := rec."Document Date";
+                        DocumentDateSet := true;
+                    end;
+                }
+                field(postingDate; rec."Posting Date")
+                {
+                    trigger OnValidate()
+                    begin
+                        PostingDateVar := rec."Posting Date";
+                        PostingDateSet := true;
+                    end;
+                }
+                field(dueDate; rec."Due Date")
+                {
+                    trigger OnValidate()
+                    begin
+                        DueDateVar := rec."Due Date";
+                        DueDateSet := true;
+                    end;
+                }
+                field(customerNumber; rec."Sell-to Customer No.") { }
+                field(customerName; rec."Sell-to Customer Name") { Editable = false; }
+                field(billToName; rec."Bill-to Name") { Editable = false; }
+                field(billToCustomerNumber; rec."Bill-to Customer No.") { }
+                field(sellToAddressLine1; rec."Sell-to Address") { }
+                field(sellToAddressLine2; rec."Sell-to Address 2") { }
+                field(sellToCity; rec."Sell-to City") { }
+                field(sellToCountry; rec."Sell-to Country/Region Code") { }
+                field(sellToCounty; rec."Sell-to County") { }
+                field(sellToPostCode; rec."Sell-to Post Code") { }
+                field(billToAddressLine1; rec."Bill-to Address") { }
+                field(billToAddressLine2; rec."Bill-to Address 2") { }
+                field(billToCity; rec."Bill-to City") { }
+                field(billToCountry; rec."Bill-to Country/Region Code") { }
+                field(billToState; rec."Bill-to County") { }
+                field(billToPostCode; rec."Bill-to Post Code") { }
+                field(shortcutDimension1Code; rec."Shortcut Dimension 1 Code") { }
+                field(shortcutDimension2Code; rec."Shortcut Dimension 2 Code") { }
+                field(currencyCode; rec."Currency Code") { }
+                field(paymentTermsCode; rec."Payment Terms Code") { }
+                field(shipmentMethodCode; rec."Shipment Method Code") { }
+                field(salesperson; rec."Salesperson Code") { }
+                field(status; rec.Status) { Editable = false; }
+                field(lastModifiedDateTime; rec.SystemModifiedAt) { Editable = false; }
+                field(AppliesToInvoiceNumber; rec."Applies-to Doc. No.")
+                {
+                    trigger OnValidate()
+                    begin
+                        if InvoiceNo <> '' then begin
+                            if rec."Applies-to Doc. No." <> InvoiceNo then
+                                Error(InvoiceValuesDontMatchErr);
+                            exit;
+                        end;
+
+                        rec."Applies-to Doc. Type" := rec."Applies-to Doc. Type"::Invoice;
+                    end;
+                }
+                field(phoneNumber; rec."Sell-to Phone No.") { }
+                field(email; rec."Sell-to E-Mail") { }
+
+                field(customerReturnReasonCode; rec."Reason Code") { }
+                field(WorkDescription; WorkDescription)
+                {
+                    trigger OnValidate()
+                    begin
+                        rec.SetWorkDescription(WorkDescription);
+                    end;
+                }
+            }
+        }
+    }
+
+    actions
+    {
+    }
+
+    trigger OnAfterGetRecord()
+    begin
+        if HasWritePermissionForDraft then
+            SetCalculatedFields();
+        WorkDescription := rec.GetWorkDescription();
+    end;
+
+    trigger OnModifyRecord(): Boolean
+    begin
+        if xRec.SystemId <> rec.SystemId then
+            Error(CannotChangeIDErr);
+
+        SetCalculatedFields();
+
+        exit(false);
+    end;
+
+    var
+        WorkDescription: Text;
+        GraphMgtSalCrMemoBuf: Codeunit "Graph Mgt - Sal. Cr. Memo Buf.";
+        GraphMgtGeneralTools: Codeunit "Graph Mgt - General Tools";
+        LCYCurrencyCode: Code[10];
+        CurrencyCodeTxt: Text;
+        CannotChangeIDErr: Label 'The "id" cannot be changed.', Comment = 'id is a field name and should not be translated.';
+        SellToCustomerNotProvidedErr: Label 'A "customerNumber" or a "customerId" must be provided.', Comment = 'customerNumber and customerId are field names and should not be translated.';
+        DiscountAmountSet: Boolean;
+        InvoiceDiscountAmount: Decimal;
+        SalesInvoiceId: Guid;
+        InvoiceNo: Code[20];
+        InvoiceValuesDontMatchErr: Label 'The "invoiceId" and "invoiceNumber" do not match to a specific Invoice.', Comment = 'invoiceId and invoiceNumber are field names and should not be translated.';
+        CannotFindCreditMemoErr: Label 'The credit memo cannot be found.';
+        CancelingCreditMemoFailedInvoiceCreatedAndPostedErr: Label 'Canceling the credit memo failed because of the following error: \\%1\\An invoice is posted.', Comment = '%1 - arbitrary text (an error message)';
+        CancelingCreditMemoFailedInvoiceCreatedButNotPostedErr: Label 'Canceling the credit memo failed because of the following error: \\%1\\An invoice is created but not posted.', Comment = '%1 - arbitrary text (an error message)';
+        CancelingCreditMemoFailedNothingCreatedErr: Label 'Canceling the credit memo failed because of the following error: \\%1.', Comment = '%1 - arbitrary text (an error message)';
+        AlreadyCancelledErr: Label 'The credit memo cannot be cancelled because it has already been canceled.';
+        NoLineErr: Label 'Please add at least one line item to the credit memo.';
+        DocumentDateSet: Boolean;
+        DocumentDateVar: Date;
+        PostingDateSet: Boolean;
+        PostingDateVar: Date;
+        DueDateSet: Boolean;
+        DueDateVar: Date;
+        HasWritePermissionForDraft: Boolean;
+
+    local procedure SetCalculatedFields()
+    begin
+        Rec.LoadFields("Applies-to Doc. Type", "Currency Code");
+        CurrencyCodeTxt := GraphMgtGeneralTools.TranslateNAVCurrencyCodeToCurrencyCode(LCYCurrencyCode, rec."Currency Code");
+    end;
+
+    local procedure ClearCalculatedFields()
+    begin
+        Clear(SalesInvoiceId);
+        Clear(InvoiceNo);
+        Clear(InvoiceDiscountAmount);
+        Clear(DiscountAmountSet);
+    end;
+
+    local procedure CheckSellToCustomerSpecified()
+    begin
+        if (rec."Sell-to Customer No." = '')
+        then
+            Error(SellToCustomerNotProvidedErr);
+    end;
+
+
+    local procedure GetPostedCreditMemo(var SalesCrMemoHeader: Record "Sales Cr.Memo Header")
+    begin
+        if not GraphMgtSalCrMemoBuf.GetSalesCrMemoHeaderFromId(rec.SystemId, SalesCrMemoHeader) then
+            Error(CannotFindCreditMemoErr);
+    end;
+
+    local procedure GetDraftCreditMemo(var SalesHeader: Record "Sales Header")
+    begin
+        if not SalesHeader.GetBySystemId(rec.SystemId) then
+            Error(CannotFindCreditMemoErr);
+    end;
+
+
+
+    local procedure PostCreditMemo(var SalesHeader: Record "Sales Header"; var SalesCrMemoHeader: Record "Sales Cr.Memo Header")
+    var
+        LinesInstructionMgt: Codeunit "Lines Instruction Mgt.";
+        PreAssignedNo: Code[20];
+    begin
+        if not SalesHeader.SalesLinesExist() then
+            Error(NoLineErr);
+        LinesInstructionMgt.SalesCheckAllLinesHaveQuantityAssigned(SalesHeader);
+        PreAssignedNo := SalesHeader."No.";
+        SalesHeader.SendToPosting(Codeunit::"Sales-Post");
+        SalesCrMemoHeader.SETCURRENTKEY("Pre-Assigned No.");
+        SalesCrMemoHeader.SetRange("Pre-Assigned No.", PreAssignedNo);
+        SalesCrMemoHeader.FindFirst();
+    end;
+
+    local procedure CancelCreditMemo(var SalesCrMemoHeader: Record "Sales Cr.Memo Header")
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        SalesHeader: Record "Sales Header";
+    begin
+        GetPostedCreditMemo(SalesCrMemoHeader);
+        if not Codeunit.Run(Codeunit::"Cancel Posted Sales Cr. Memo", SalesCrMemoHeader) then begin
+            SalesInvoiceHeader.SetRange("Applies-to Doc. No.", SalesCrMemoHeader."No.");
+            if not SalesInvoiceHeader.IsEmpty() then
+                Error(CancelingCreditMemoFailedInvoiceCreatedAndPostedErr, GetLastErrorText());
+            SalesHeader.SetRange("Applies-to Doc. No.", SalesCrMemoHeader."No.");
+            if not SalesHeader.IsEmpty() then
+                Error(CancelingCreditMemoFailedInvoiceCreatedButNotPostedErr, GetLastErrorText());
+            Error(CancelingCreditMemoFailedNothingCreatedErr, GetLastErrorText());
+        end;
+    end;
+
+    local procedure SetActionResponse(var ActionContext: WebServiceActionContext; ParamInvoiceId: Guid)
+    begin
+        ActionContext.SetObjectType(ObjectType::Page);
+        ActionContext.SetObjectId(Page::"APIV2 - Sales Credit Memos");
+        ActionContext.AddEntityKey(rec.FieldNo(SystemId), ParamInvoiceId);
+        ActionContext.SetResultCode(WebServiceActionResultCode::Deleted);
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure Post(var ActionContext: WebServiceActionContext)
+    var
+        SalesHeader: Record "Sales Header";
+        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+    begin
+        GetDraftCreditMemo(SalesHeader);
+        PostCreditMemo(SalesHeader, SalesCrMemoHeader);
+        SetActionResponse(ActionContext, GraphMgtSalCrMemoBuf.GetSalesCrMemoHeaderId(SalesCrMemoHeader));
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure PostAndSend(var ActionContext: WebServiceActionContext)
+    var
+        SalesHeader: Record "Sales Header";
+        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+        APIV2SendSalesDocument: Codeunit "APIV2 - Send Sales Document";
+    begin
+        GetDraftCreditMemo(SalesHeader);
+        PostCreditMemo(SalesHeader, SalesCrMemoHeader);
+        Commit();
+        APIV2SendSalesDocument.SendCreditMemo(SalesCrMemoHeader);
+        SetActionResponse(ActionContext, GraphMgtSalCrMemoBuf.GetSalesCrMemoHeaderId(SalesCrMemoHeader));
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure Send(var ActionContext: WebServiceActionContext)
+    var
+        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+        APIV2SendSalesDocument: Codeunit "APIV2 - Send Sales Document";
+    begin
+        GetPostedCreditMemo(SalesCrMemoHeader);
+        APIV2SendSalesDocument.SendCreditMemo(SalesCrMemoHeader);
+        SetActionResponse(ActionContext, GraphMgtSalCrMemoBuf.GetSalesCrMemoHeaderId(SalesCrMemoHeader));
+        exit;
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure Cancel(var ActionContext: WebServiceActionContext)
+    var
+        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+    begin
+        GetPostedCreditMemo(SalesCrMemoHeader);
+        CancelCreditMemo(SalesCrMemoHeader);
+        SetActionResponse(ActionContext, GraphMgtSalCrMemoBuf.GetSalesCrMemoHeaderId(SalesCrMemoHeader));
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure CancelAndSend(var ActionContext: WebServiceActionContext)
+    var
+        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+        APIV2SendSalesDocument: Codeunit "APIV2 - Send Sales Document";
+    begin
+        GetPostedCreditMemo(SalesCrMemoHeader);
+        CancelCreditMemo(SalesCrMemoHeader);
+        APIV2SendSalesDocument.SendCreditMemo(SalesCrMemoHeader);
+        SetActionResponse(ActionContext, GraphMgtSalCrMemoBuf.GetSalesCrMemoHeaderId(SalesCrMemoHeader));
+    end;
+}

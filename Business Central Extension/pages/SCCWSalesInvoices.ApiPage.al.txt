@@ -1,0 +1,359 @@
+page 64054 "SSCW - Sales Invoices"
+{
+    APIVersion = 'v2.0';
+    APIPublisher = 'eOneSolutions';
+    APIGroup = 'ConnectWise';
+    EntityCaption = 'Sales Invoice';
+    EntitySetCaption = 'Sales Invoices';
+    ChangeTrackingAllowed = true;
+    DelayedInsert = true;
+    EntityName = 'salesInvoice';
+    EntitySetName = 'salesInvoices';
+    ODataKeyFields = systemId;
+    PageType = API;
+    SourceTable = "Sales Header";
+    SourceTableView = WHERE("Document Type" = FILTER(Invoice));
+    Extensible = true;
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field(id; rec.systemId) { Editable = false; }
+                field(number; rec."No.") { }
+                field(externalDocumentNumber; rec."External Document No.") { }
+                field(yourReference; rec."Your Reference") { }
+                field(documentDate; rec."Document Date")
+                {
+                    trigger OnValidate()
+                    begin
+                        DocumentDateVar := rec."Document Date";
+                        DocumentDateSet := true;
+                    end;
+                }
+                field(postingDate; rec."Posting Date")
+                {
+                    trigger OnValidate()
+                    begin
+                        PostingDateVar := rec."Posting Date";
+                        PostingDateSet := true;
+                    end;
+                }
+                field(dueDate; rec."Due Date")
+                {
+                    trigger OnValidate()
+                    begin
+                        DueDateVar := rec."Due Date";
+                        DueDateSet := true;
+                    end;
+                }
+                field(customerNumber; rec."Sell-to Customer No.") { }
+                field(customerName; rec."Sell-to Customer Name") { Editable = false; }
+                field(billToName; rec."Bill-to Name") { Editable = false; }
+                field(billToCustomerNumber; rec."Bill-to Customer No.") { }
+                field(shipToName; rec."Ship-to Name")
+                {
+                    trigger OnValidate()
+                    begin
+                        if xRec."Ship-to Name" <> rec."Ship-to Name" then begin
+                            rec."Ship-to Code" := '';
+                        end;
+                    end;
+                }
+                field(shipToContact; rec."Ship-to Contact")
+                {
+                    trigger OnValidate()
+                    begin
+                        if xRec."Ship-to Contact" <> rec."Ship-to Contact" then begin
+                            rec."Ship-to Code" := '';
+                        end;
+                    end;
+                }
+                field(sellToAddressLine1; rec."Sell-to Address") { }
+                field(sellToAddressLine2; rec."Sell-to Address 2") { }
+                field(sellToCity; rec."Sell-to City") { }
+                field(sellToCountry; rec."Sell-to Country/Region Code") { }
+                field(sellToState; rec."Sell-to County") { }
+                field(sellToPostCode; rec."Sell-to Post Code") { }
+                field(shipToAddressLine1; rec."Ship-to Address")
+                {
+                    trigger OnValidate()
+                    begin
+                        rec."Ship-to Code" := '';
+                    end;
+                }
+                field(shipToAddressLine2; rec."Ship-to Address 2")
+                {
+                    trigger OnValidate()
+                    begin
+                        rec."Ship-to Code" := '';
+                    end;
+                }
+                field(shipToCity; rec."Ship-to City")
+                {
+                    trigger OnValidate()
+                    begin
+                        rec."Ship-to Code" := '';
+                    end;
+                }
+                field(shipToCountry; rec."Ship-to Country/Region Code")
+                {
+                    trigger OnValidate()
+                    begin
+                        rec."Ship-to Code" := '';
+                    end;
+                }
+                field(shipToCounty; rec."Ship-to County")
+                {
+                    trigger OnValidate()
+                    begin
+                        rec."Ship-to Code" := '';
+                    end;
+                }
+                field(shipToPostCode; rec."Ship-to Post Code")
+                {
+                    trigger OnValidate()
+                    begin
+                        rec."Ship-to Code" := '';
+                    end;
+                }
+                field(shortcutDimension1Code; rec."Shortcut Dimension 1 Code") { }
+                field(shortcutDimension2Code; rec."Shortcut Dimension 2 Code") { }
+                field(currencyCode; rec."Currency Code") { }
+                field(paymentTermsCode; rec."Payment Terms Code") { }
+                field(paymentMethodCode; rec."Payment Method Code") { }
+                field(shipmentMethodCode; rec."Shipment Method Code") { }
+                field(salesperson; rec."Salesperson Code") { }
+                field(taxAreaCode; rec."Tax Area Code") { }
+                field(shipmentDate; rec."Shipment Date") { }
+                field(pricesIncludeTax; rec."Prices Including VAT") { }
+                field(status; rec.Status) { Editable = false; }
+                field(lastModifiedDateTime; rec.SystemModifiedAt) { Editable = false; }
+                field(phoneNumber; rec."Sell-to Phone No.") { }
+                field(email; rec."Sell-to E-Mail") { }
+                field(WorkDescription; WorkDescription)
+                {
+                    trigger OnValidate()
+                    begin
+                        rec.SetWorkDescription(WorkDescription);
+                    end;
+                }
+            }
+        }
+    }
+
+    // trigger OnAfterGetRecord()
+    // begin
+    //     if HasWritePermissionForDraft then
+    //         SetCalculatedFields();
+    //     WorkDescription := rec.GetWorkDescription();
+    // end;
+
+
+    // trigger OnModifyRecord(): Boolean
+    // begin
+    //     if xRec.SystemId <> rec.SystemId then
+    //         Error(CannotChangeIDErr);
+
+    //     UpdateDiscount();
+
+    //     SetCalculatedFields();
+
+    //     exit(false);
+    // end;
+
+    var
+        WorkDescription: Text;
+        O365SetupEmail: Codeunit "O365 Setup Email";
+        APIV2SendSalesDocument: Codeunit "APIV2 - Send Sales Document";
+        GraphMgtGeneralTools: Codeunit "Graph Mgt - General Tools";
+        CannotChangeIDErr: Label 'The id cannot be changed.';
+        LCYCurrencyCode: Code[10];
+        CurrencyCodeTxt: Text;
+        SellToCustomerNotProvidedErr: Label 'A "customerNumber" or a "customerId" must be provided.', Comment = 'customerNumber and customerId are field names and should not be translated.';
+        DiscountAmountSet: Boolean;
+        InvoiceDiscountAmount: Decimal;
+        RemainingAmountVar: Decimal;
+        DocumentDateSet: Boolean;
+        DocumentDateVar: Date;
+        PostingDateSet: Boolean;
+        PostingDateVar: Date;
+        DueDateSet: Boolean;
+        DueDateVar: Date;
+        CancelingInvoiceFailedCreditMemoCreatedAndPostedErr: Label 'Canceling the invoice failed because of the following error: \\%1\\A credit memo is posted.', Comment = '%1 - arbitrary text (an error message)';
+        CancelingInvoiceFailedCreditMemoCreatedButNotPostedErr: Label 'Canceling the invoice failed because of the following error: \\%1\\A credit memo is created but not posted.', Comment = '%1 - arbitrary text (an error message)';
+        CancelingInvoiceFailedNothingCreatedErr: Label 'Canceling the invoice failed because of the following error: \\%1.', Comment = '%1 - arbitrary text (an error message)';
+        EmptyEmailErr: Label 'The send-to email is empty. Specify email either for the customer or for the invoice in email preview.';
+        HasWritePermissionForDraft: Boolean;
+
+    // local procedure SetCalculatedFields()
+    // begin
+    //     Rec.LoadFields("No.", "Currency Code", Status);
+    //     CurrencyCodeTxt := GraphMgtGeneralTools.TranslateNAVCurrencyCodeToCurrencyCode(LCYCurrencyCode, rec."Currency Code");
+    // end;
+
+    // local procedure ClearCalculatedFields()
+    // begin
+    //     Clear(InvoiceDiscountAmount);
+    //     Clear(DiscountAmountSet);
+    //     Clear(RemainingAmountVar);
+    // end;
+
+    // local procedure CheckSellToCustomerSpecified()
+    // begin
+    //     if (rec."Sell-to Customer No." = '')
+    //     then
+    //         Error(SellToCustomerNotProvidedErr);
+    // end;
+
+
+    // local procedure UpdateDiscount()
+    // var
+    //     SalesHeader: Record "Sales Header";
+    //     SalesCalcDiscountByType: Codeunit "Sales - Calc Discount By Type";
+    // begin
+    //     SalesHeader.Get(rec."Document Type"::Invoice, rec."No.");
+    //     SalesCalcDiscountByType.ApplyInvDiscBasedOnAmt(InvoiceDiscountAmount, SalesHeader);
+    // end;
+
+    // local procedure SetDates()
+
+    // begin
+    //     if not (DueDateSet or DocumentDateSet or PostingDateSet) then
+    //         exit;
+
+    //     if DocumentDateSet then begin
+    //         rec."Document Date" := DocumentDateVar;
+    //     end;
+
+    //     if PostingDateSet then begin
+    //         rec."Posting Date" := PostingDateVar;
+    //     end;
+
+    //     if DueDateSet then begin
+    //         rec."Due Date" := DueDateVar;
+    //     end;
+    //     rec.Find();
+    // end;
+
+
+
+    // local procedure CheckSendToEmailAddress(DocumentNo: Code[20])
+    // begin
+    //     if GetSendToEmailAddress(DocumentNo) = '' then
+    //         Error(EmptyEmailErr);
+    // end;
+
+    // local procedure GetSendToEmailAddress(DocumentNo: Code[20]): Text[250]
+    // var
+    //     EmailAddress: Text[250];
+    // begin
+    //     EmailAddress := GetDocumentEmailAddress(DocumentNo);
+    //     if EmailAddress <> '' then
+    //         exit(EmailAddress);
+    //     EmailAddress := GetCustomerEmailAddress();
+    //     exit(EmailAddress);
+    // end;
+
+    // local procedure GetCustomerEmailAddress(): Text[250]
+    // var
+    //     Customer: Record Customer;
+    // begin
+    //     if not Customer.Get(rec."Sell-to Customer No.") then
+    //         exit('');
+    //     exit(Customer."E-Mail");
+    // end;
+
+    // local procedure GetDocumentEmailAddress(DocumentNo: Code[20]): Text[250]
+    // var
+    //     EmailParameter: Record "Email Parameter";
+    // begin
+    //     if not EmailParameter.Get(DocumentNo, rec."Document Type", EmailParameter."Parameter Type"::Address) then
+    //         exit('');
+    //     exit(EmailParameter."Parameter Value");
+    // end;
+
+    // local procedure PostInvoice(var SalesHeader: Record "Sales Header"; var SalesInvoiceHeader: Record "Sales Invoice Header")
+    // var
+    //     LinesInstructionMgt: Codeunit "Lines Instruction Mgt.";
+    //     PreAssignedNo: Code[20];
+    // begin
+    //     APIV2SendSalesDocument.CheckDocumentIfNoItemsExists(SalesHeader);
+    //     LinesInstructionMgt.SalesCheckAllLinesHaveQuantityAssigned(SalesHeader);
+    //     PreAssignedNo := SalesHeader."No.";
+    //     SalesHeader.SendToPosting(Codeunit::"Sales-Post");
+    //     SalesInvoiceHeader.SETCURRENTKEY("Pre-Assigned No.");
+    //     SalesInvoiceHeader.SetRange("Pre-Assigned No.", PreAssignedNo);
+    //     SalesInvoiceHeader.FindFirst();
+    // end;
+
+    // local procedure SendPostedInvoice(var SalesInvoiceHeader: Record "Sales Invoice Header")
+    // begin
+    //     O365SetupEmail.CheckMailSetup();
+    //     CheckSendToEmailAddress(SalesInvoiceHeader."No.");
+
+    //     SalesInvoiceHeader.SETRECFILTER();
+    //     SalesInvoiceHeader.EmailRecords(false);
+    // end;
+
+    // local procedure SendDraftInvoice(var SalesHeader: Record "Sales Header")
+    // var
+    //     LinesInstructionMgt: Codeunit "Lines Instruction Mgt.";
+    // begin
+    //     APIV2SendSalesDocument.CheckDocumentIfNoItemsExists(SalesHeader);
+    //     LinesInstructionMgt.SalesCheckAllLinesHaveQuantityAssigned(SalesHeader);
+    //     O365SetupEmail.CheckMailSetup();
+    //     CheckSendToEmailAddress(SalesHeader."No.");
+
+    //     SalesHeader.SETRECFILTER();
+    //     SalesHeader.EmailRecords(false);
+    // end;
+
+    // local procedure SendCanceledInvoice(var SalesInvoiceHeader: Record "Sales Invoice Header")
+    // var
+    //     JobQueueEntry: Record "Job Queue Entry";
+    // begin
+    //     O365SetupEmail.CheckMailSetup();
+    //     CheckSendToEmailAddress(SalesInvoiceHeader."No.");
+
+    //     JobQueueEntry.Init();
+    //     JobQueueEntry."Object Type to Run" := JobQueueEntry."Object Type to Run"::Codeunit;
+    //     JobQueueEntry."Object ID to Run" := Codeunit::"O365 Sales Cancel Invoice";
+    //     JobQueueEntry."Maximum No. of Attempts to Run" := 3;
+    //     JobQueueEntry."Record ID to Process" := SalesInvoiceHeader.RecordId();
+    //     Codeunit.RUN(Codeunit::"Job Queue - Enqueue", JobQueueEntry);
+    // end;
+
+    // local procedure CancelInvoice(var SalesInvoiceHeader: Record "Sales Invoice Header")
+    // var
+    //     SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+    //     SalesHeader: Record "Sales Header";
+    // begin
+    //     if not Codeunit.RUN(Codeunit::"Correct Posted Sales Invoice", SalesInvoiceHeader) then begin
+    //         SalesCrMemoHeader.SetRange("Applies-to Doc. No.", SalesInvoiceHeader."No.");
+    //         if Not SalesCrMemoHeader.IsEmpty() then
+    //             Error(CancelingInvoiceFailedCreditMemoCreatedAndPostedErr, GETLASTERRORTEXT());
+    //         SalesHeader.SetRange("Applies-to Doc. No.", SalesInvoiceHeader."No.");
+    //         if Not SalesHeader.IsEmpty() then
+    //             Error(CancelingInvoiceFailedCreditMemoCreatedButNotPostedErr, GETLASTERRORTEXT());
+    //         Error(CancelingInvoiceFailedNothingCreatedErr, GETLASTERRORTEXT());
+    //     end;
+    // end;
+
+    // local procedure SetActionResponse(var ActionContext: WebServiceActionContext; InvoiceId: Guid)
+    // var
+    // begin
+    //     SetActionResponse(ActionContext, Page::"APIV2 - Sales Invoices", InvoiceId);
+    // end;
+
+    // local procedure SetActionResponse(var ActionContext: WebServiceActionContext; PageId: Integer; DocumentId: Guid)
+    // var
+    // begin
+    //     ActionContext.SetObjectType(ObjectType::Page);
+    //     ActionContext.SetObjectId(PageId);
+    //     ActionContext.AddEntityKey(rec.FieldNo(SystemId), DocumentId);
+    //     ActionContext.SetResultCode(WebServiceActionResultCode::Deleted);
+    // end;
+}

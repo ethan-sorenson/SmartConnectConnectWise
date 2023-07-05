@@ -57,6 +57,6 @@ The following API Queries and pages are added to improve functionality.
 ## Updates
 
 - 1.0.0.0 first release on BC v17
-- 1.0.0.2 Added external ids to Location and Bin tables and a LocationBins query for faster lookups. Also added a web service for creating new Dimension Values.
+- 1.0.0.3 Added external ids to Location and Bin tables and a LocationBins query for faster lookups. Also added a web service for creating new Dimension Values.
 
 ***Enjoy!***
