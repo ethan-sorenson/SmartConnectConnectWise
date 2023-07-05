@@ -5,7 +5,7 @@ ConnectWise Companies to Business Central Customers
 This integration will incrementally query customer records from ConnectWise based on a date filter and push them into Business Central as customers.
 
 ## Source
-![Source](SmartConnect Maps\CUSTOMERS_01_CW_BC\Images\Source.png)
+![Source](./CUSTOMERS_01_CW_BC\Images\Source.png)
 
 ## Target
 ![Target](SmartConnect Maps\CUSTOMERS_01_CW_BC\Images\Target.png)
