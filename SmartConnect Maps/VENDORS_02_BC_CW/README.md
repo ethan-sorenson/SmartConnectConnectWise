@@ -24,7 +24,7 @@ if (!this._ConnectWiseId && this._VendorPostingGroup != 'MEMBERS') {
     return false;
 }
 ```
-![VendorCreate](./Images/Create%20Vendor.pngg)
+![VendorCreate](./Images/Create%20Vendor.png)
 
 ### Update Vendor
 ```javascript
@@ -35,7 +35,7 @@ if (this._ConnectWiseId && this._VendorPostingGroup != 'MEMBERS') {
     return false;
 }
 ```
-![VendorUpdate](./Images/Update%20Vendor.pngg)
+![VendorUpdate](./Images/Update%20Vendor.png)
 
 ## Tasks
 None

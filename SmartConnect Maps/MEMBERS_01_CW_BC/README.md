@@ -1,15 +1,14 @@
-# CUSTOMERS_01_CW_BC
-ConnectWise Companies to Business Central Customers
+# MEMBERS_01_CW_BC
+ConnectWise Members to Business Central Vendors
 
 ## Overview
-This integration will incrementally query customer records from ConnectWise based on a date filter and push them into Business Central as customers.
+This integration will incrementally query Member records from ConnectWise based on a date filter and push them into Business Central as vendors.
 
 ## Source
 **Filters**
 | Key    | Value |
 | -------- | ------- |
-| childconditions  | types/id<>6    |
-| conditions | lastUpdated>=[GBL_CW_DATE] and updatedBy !='[[integrationUser]]' and deletedFlag=false     |
+| conditions | inactiveFlag=false and lastUpdated>=[GBL_CW_DATE]     |
 
 ![Source](./Images/Source.png)
 
@@ -18,27 +17,8 @@ This integration will incrementally query customer records from ConnectWise base
 
 ## Integration
 
-### CustomerCreate
-```javascript
-//Use this mapping if accountNumber field is blank
-if (!this._accountNumber) {
-    return true;
-} else {
-    return false;
-} 
-```
-![CustomerCreate](./Images/CustomerCreate.png)
-
-### CustomerUpdate
-```javascript
-//Use this mapping if accountNumber field contains a value
-if (this._accountNumber) {
-    return true;
-} else {
-    return false;
-}
-```
-![CustomerCreate](./Images/CustomerUpdate.png)
+### VendorCreate
+![VendorCreate](./Images/VendorCreate.png)
 
 ## Tasks
 
