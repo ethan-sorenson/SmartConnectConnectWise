@@ -1,22 +1,41 @@
 # CUSTOMERS_02_BC_CW
-siness Central Customers
+Business Central Customers to ConnectWise Companies
 
 ## Overview
-This integration will incrementally query customer records from ConnectWise based on a date filter and push them into Business Central as customers.
+This integration will create/update recently modified BC Customers in ConnectWise.
 
 ## Source
+**Filters**
+None
+
 ![Source](./Images/Source.png)
 
 ## Target
 ![Target](./Images/Target.png)
 
 ## Integration
-![Integration](./Images/Integration.png)
 
-### CustomerCreate
-![CustomerCreate](./Images/CustomerCreate.png)
+### Create Customer
+```javascript
+//use this mapping if ConnectWiseId does not contain a value
+if (!this._ConnectWiseId) {
+  return true;
+} else {
+  return false;
+}
+```
+![CustomerCreate](./Images/Create%20Customer.png)
 
-### CustomerUpdate
-![CustomerCreate](./Images/CustomerUpdate.png)
+### Update Customer
+```javascript
+//use this mapping if ConnectWiseId contains a value
+if (this._ConnectWiseId) {
+  return true;
+} else {
+  return false;
+}
+```
+![CustomerUpdate](./Images/Update%20Customer.png)
 
-### Tasks
+## Tasks
+None
