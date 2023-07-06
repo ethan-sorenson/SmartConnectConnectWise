@@ -5,6 +5,12 @@ ConnectWise Companies to Business Central Customers
 This integration will incrementally query customer records from ConnectWise based on a date filter and push them into Business Central as customers.
 
 ## Source
+
+| Key    | Value |
+| -------- | ------- |
+| childconditions  | types/id<>6    |
+| conditions | lastUpdated>=[GBL_CW_DATE] and updatedBy !='[[integrationUser]]' and deletedFlag=false     |
+
 ![Source](./Images/Source.png)
 
 ## Target
