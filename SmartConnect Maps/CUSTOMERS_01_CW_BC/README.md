@@ -15,10 +15,25 @@ This integration will incrementally query customer records from ConnectWise base
 ![Integration](./Images/Integration.png)
 
 ### CustomerCreate
-(./RESTRICTION_CustomerCreate.js)
+```javascript
+//Use this mapping if accountNumber field is blank
+if (!this._accountNumber) {
+    return true;
+} else {
+    return false;
+} 
+```
 ![CustomerCreate](./Images/CustomerCreate.png)
 
 ### CustomerUpdate
+```javascript
+//Use this mapping if accountNumber field contains a value
+if (this._accountNumber) {
+    return true;
+} else {
+    return false;
+}
+```
 ![CustomerCreate](./Images/CustomerUpdate.png)
 
 ### Tasks
