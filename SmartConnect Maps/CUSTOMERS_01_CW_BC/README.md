@@ -5,7 +5,7 @@ ConnectWise Companies to Business Central Customers
 This integration will incrementally query customer records from ConnectWise based on a date filter and push them into Business Central as customers.
 
 ## Source
-
+**Filters**
 | Key    | Value |
 | -------- | ------- |
 | childconditions  | types/id<>6    |
@@ -17,8 +17,6 @@ This integration will incrementally query customer records from ConnectWise base
 ![Target](./Images/Target.png)
 
 ## Integration
-
-![Integration](./Images/Integration.png)
 
 ### CustomerCreate
 ```javascript
@@ -42,4 +40,39 @@ if (this._accountNumber) {
 ```
 ![CustomerCreate](./Images/CustomerUpdate.png)
 
-### Tasks
+## Tasks
+
+### INIT_VARIABLE
+| -------- | ------- |
+| Type  | Run Script   |
+| Stage | Integration Pre Tasks  |
+```javascript
+//Store current date in a variable
+var nd = new Date();
+this.GBL_CW_STAGING_DATE = nd.toISOString();
+return true;
+```
+
+### FAILURE_SET_NEXT_RUN_DATE_TIME
+| -------- | ------- |
+| Type  | Run Script   |
+| Stage | Integration Post Failure Tasks  |
+```javascript
+//Set date filter for next run
+var nd = new Date(this.GBL_CW_STAGING_DATE);
+// format DateTime - ISO 8601 - yyyy-MM-ddThh:mm:ss:miZ
+this.GBL_CW_DATE = nd.toISOString();
+return true;
+```
+
+### SUCCESS_SET_NEXT_RUN_DATE_TIME
+| -------- | ------- |
+| Type  | Run Script   |
+| Stage | Integration Post Success Tasks  |
+```javascript
+//Set date filter for next run
+var nd = new Date(this.GBL_CW_STAGING_DATE);
+// format DateTime - ISO 8601 - yyyy-MM-ddThh:mm:ss:miZ
+this.GBL_CW_DATE = nd.toISOString();
+return true;
+```
