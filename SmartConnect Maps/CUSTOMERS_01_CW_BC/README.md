@@ -15,7 +15,7 @@ This integration will incrementally query customer records from ConnectWise base
 ![Integration](./Images/Integration.png)
 
 ### CustomerCreate
-(./RESTRICTION_CustomerCreate.js)
+./RESTRICTION_CustomerCreate.js
 ![CustomerCreate](./Images/CustomerCreate.png)
 
 ### CustomerUpdate
