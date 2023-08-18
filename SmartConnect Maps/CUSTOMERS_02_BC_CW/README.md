@@ -2,7 +2,7 @@
 Business Central Customers to ConnectWise Companies
 
 ## Overview
-This integration will create/update recently modified BC Customers in ConnectWise.
+This integration will create/update recently modified BC Customers in ConnectWise using the Business Central Change Tracking Extension.
 
 ## Source
 **Filters**

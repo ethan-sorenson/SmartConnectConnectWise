@@ -1,16 +1,14 @@
-# MEMBERS_01_CW_BC
-ConnectWise Members to Business Central Vendors
+# ITEMS_01_CW_BC
+ConnectWise Products to Business Central Items
 
 ## Overview
-This integration will incrementally query Member records from ConnectWise based on a date filter and push them into Business Central as vendors. 
-
-This integration is only required if using the Expense integrations.
+This integration will incrementally query product catalog records from ConnectWise based on a date filter and push them into Business Central as Items.
 
 ## Source
 **Filters**
 | Key    | Value |
 | -------- | ------- |
-| conditions | inactiveFlag=false and lastUpdated>=[GBL_CW_DATE]     |
+| conditions | lastUpdated>=[GBL_CW_DATE]     |
 
 ![Source](./Images/Source.png)
 
@@ -19,8 +17,27 @@ This integration is only required if using the Expense integrations.
 
 ## Integration
 
-### VendorCreate
-![VendorCreate](./Images/VendorCreate.png)
+### ItemCreate
+```javascript
+//Use this mapping if integrationXRef field is blank
+if (!this._integrationXRef && !this._inactiveFlag) {
+    return true;
+} else {
+    return false;
+}
+```
+![ItemCreate](./Images/ItemCreate.png)
+
+### ItemUpdate
+```javascript
+//Use this mapping if integrationXRef field is populated
+if (this._integrationXRef) {
+    return true;
+} else {
+    return false;
+}
+```
+![ItemUpdate](./Images/ItemUpdate.png)
 
 ## Tasks
 

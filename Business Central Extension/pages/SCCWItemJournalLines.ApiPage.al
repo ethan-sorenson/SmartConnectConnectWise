@@ -13,6 +13,7 @@ page 64059 "SSCW - Item Journal Lines"
     DelayedInsert = true;
     LinksAllowed = false;
     SourceTable = "Item Journal Line";
+    AutoSplitKey = true;
 
     layout
     {
@@ -22,7 +23,6 @@ page 64059 "SSCW - Item Journal Lines"
             {
                 field(systemId; rec.SystemId) { Editable = false; }
                 field(journalTemplateName; Rec."Journal Template Name") { }
-                field(journalBatchName; Rec."Journal Batch Name") { }
                 field(connectWiseId; Rec."ConnectWise Id") { }
                 field(lineNo; Rec."Line No.") { }
                 field(postingDate; Rec."Posting Date") { }
@@ -43,6 +43,7 @@ page 64059 "SSCW - Item Journal Lines"
                 field(unitAmount; Rec."Unit Amount") { }
                 field(Amount; Rec.Amount) { }
                 field(unitCost; Rec."Unit Cost") { }
+                field(journalBatchName; Rec."Journal Batch Name") { }
                 field(shortcutDimCode1; Rec."Shortcut Dimension 1 Code") { }
                 field(shortcutDimCode2; Rec."Shortcut Dimension 2 Code") { }
                 field(shortcutDimCode3; ShortcutDimCode[3])
@@ -139,8 +140,6 @@ page 64059 "SSCW - Item Journal Lines"
     end;
 
     var
-        ItemJnlLine: Record "Item Journal Line";
-        ItemJnlTemplate: Record "Item Journal Template";
         ShortcutDimCode: array[8] of Code[20];
         ExtendedPriceEnabled: Boolean;
 }

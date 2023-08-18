@@ -2,7 +2,7 @@
 Business Central Vendors to ConnectWise Companies
 
 ## Overview
-This integration will create/update recently modified BC Vendors in ConnectWise.
+This integration will create/update recently modified BC Vendors in ConnectWise using the Business Central Change Tracking Extension.
 
 ## Source
 **Filters**
