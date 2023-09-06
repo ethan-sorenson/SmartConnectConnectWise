@@ -35,7 +35,7 @@ The following API Queries and pages are added to improve functionality.
 
 1. You can either install the .app file directly or download the source code and make your own extension.
 2. Publish the extension in Business Central.
-3. In SmartConnect, click ***Refresh Service List*** on any Business Central Odata data source.
+3. In SmartConnect, click ***Refresh Service List*** on any Business Central OData data source.
 3. Import the integration processes for your ConnectWise integration.
 
 ![increment](https://i.imgur.com/ENxN3bc.jpg)
@@ -49,7 +49,7 @@ The following API Queries and pages are added to improve functionality.
 
 **Something else isn't working properly**
 
-- Use github's issue reporter on the right
+- Use GitHub's issue reporter on the right
 - Send me an email ethan.sorenson@eonesolutions.com (might take a few days)
 
 ## Updates

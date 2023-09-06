@@ -2,729 +2,16 @@
 	"info": {
 		"_postman_id": "39c0c105-d143-42c9-929c-a5df40459546",
 		"name": "Connectwise",
+		"description": "# ConnectWise Collection Setup\n\nBefore using the connector, you will need to update the Collection Authorization and Variables tabs with your credentials and server address as configured in Connectwise.\n[More information here](https://github.com/ethan-sorenson/SmartConnectConnectWise/wiki/Getting-Started#create-your-api-member)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2122723"
 	},
 	"item": [
 		{
-			"name": "Batch Management",
+			"name": "Customers",
 			"item": [
 				{
-					"name": "Post Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": 1,\r\n  \"batchIdentifier\": \"SC2020-04-27\",\r\n  \"glInterfaceIdentifier\": \"SC2020-04-27\",\r\n  \"exportInvoicesFlag\": true,\r\n  \"exportExpensesFlag\": true,\r\n  \"exportProductsFlag\": true,\r\n  \"processedRecordIds\": [\r\n    1,2,3\r\n  ],\r\n  \"summarizeExpenses\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/batches",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"batches"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						},
-						"description": "After invoices are sent to the customer, the invoices move to the Unposted Invoices table, then it is up to the integration to post them to the Posted Invoices table. You will need to list all records to be posted in an array called processedRecordIds."
-					},
-					"response": []
-				},
-				{
-					"name": "List Posted Batches",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/batches",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"batches"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Export Purchase Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-277\",\r\n  \"glInterfaceIdentifier\": \"SC2020-04-277\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportProductsFlag\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"export"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Export Purchase Batch",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "ClientId",
-										"value": "{{ClientId}}",
-										"type": "text"
-									},
-									{
-										"key": "version",
-										"value": "2023.2",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"batchIdentifier\": \"SC2020-004-277\",\r\n  \"glInterfaceIdentifier\": \"SC2020-04-277\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Condensed\",\r\n  \"exportProductsFlag\": true,\r\n  \"includedProductIds\":[\"3-Test123-purchase\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-									"protocol": "https",
-									"host": [
-										"{{BaseUrl}}"
-									],
-									"path": [
-										"{{Release}}",
-										"apis",
-										"3.0",
-										"finance",
-										"accounting",
-										"export"
-									],
-									"query": [
-										{
-											"key": "fields",
-											"value": "id,name,invoice/id",
-											"disabled": true
-										},
-										{
-											"key": "childConditions",
-											"value": "invoice/invoiceNumber=1003",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 24 Apr 2023 10:03:44 GMT"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Expires",
-									"value": "-1"
-								},
-								{
-									"key": "Location",
-									"value": "http://staging.connectwisedev.com/v2022_2/apis/3.0/finance/accounting/export"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=31536000; includeSubDomains"
-								},
-								{
-									"key": "api-current-version",
-									"value": "2022.2"
-								},
-								{
-									"key": "Content-Security-Policy",
-									"value": "frame-ancestors 'self' blob: *.myconnectwise.net *.connectwisedev.com *.itboost.com; default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: *.walkme.com *.connectwise *.connectwise.com az416426.vo.msecnd.net dc.services.visualstudio.com/v2/track *.connectwisedev.com *.myconnectwise.net cwview.com *.wise-pay.com *.wise-sync.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com files.connectwise.com *.itsupport247.net *.myconnectwise.net; font-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.walkme.com *.connectwise.com *.googleapis.com; img-src * data: snapshot:; frame-src * data: mailto:; connect-src 'self' *.walkme.com *.connectwise.com *.connectwisedev.com *.myconnectwise.net *.itsupport247.net cwview.com dc.services.visualstudio.com/v2/track cheetah quotewerks://* wss://*.amazonaws.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.connectwise.com *.connectwisedev.com *.myconnectwise.net cwview.com *.walkme.com *.cwnet.io *.itsupport247.net"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "ASP.NET"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "X-Cache",
-									"value": "Miss from cloudfront"
-								},
-								{
-									"key": "Via",
-									"value": "1.1 424b84afee9a0dfcc97734549e57311c.cloudfront.net (CloudFront)"
-								},
-								{
-									"key": "X-Amz-Cf-Pop",
-									"value": "CPH50-C2"
-								},
-								{
-									"key": "X-Amz-Cf-Id",
-									"value": "0UNvj88g1cASM7b4igMLe-mU84IwhG3OQ8IOMfcm2alunjxx9EKnVw=="
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"exportSettings\": {\n        \"glBatchID\": \"SC2020-004-277\",\n        \"cogsFlag\": true,\n        \"salesTaxFlag\": true,\n        \"salesTaxGroupsFlag\": false,\n        \"inventoryPostFlag\": true,\n        \"expenseAsBillFlag\": true,\n        \"expenseSummaryFlag\": false,\n        \"exportInvoices\": false,\n        \"exportExpenses\": false,\n        \"exportInventory\": true,\n        \"syncPayments\": false,\n        \"lastPaymentSync\": \"\",\n        \"dropShipCogsFlag\": false,\n        \"UomProductFlag\": false\n    },\n    \"vendors\": [\n        {\n            \"vendor\": {\n                \"id\": 3,\n                \"identifier\": \"ConnectWise\",\n                \"_info\": {\n                    \"company_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/3\"\n                }\n            },\n            \"vendorNumber\": \"\",\n            \"company\": {\n                \"id\": 3,\n                \"identifier\": \"ConnectWise\",\n                \"_info\": {\n                    \"company_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/3\"\n                }\n            },\n            \"contact\": {\n                \"id\": 2,\n                \"name\": \"Arnie Bellini\",\n                \"_info\": {\n                    \"contact_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/contacts/2\"\n                }\n            },\n            \"accountNumber\": \"\",\n            \"billingTerms\": {\n                \"id\": 2,\n                \"name\": \"Net 10\"\n            },\n            \"dueDays\": 10,\n            \"site\": {\n                \"id\": 2,\n                \"name\": \"Main\",\n                \"_info\": {\n                    \"site_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/3/sites/2\"\n                }\n            },\n            \"taxCode\": {\n                \"id\": 11,\n                \"name\": \"State\",\n                \"_info\": {\n                    \"taxCode_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//finance/taxCodes/11\"\n                }\n            }\n        }\n    ],\n    \"customers\": [],\n    \"transactions\": [],\n    \"expenses\": [],\n    \"expenseBills\": [],\n    \"purchaseTransactions\": [\n        {\n            \"id\": \"PO #Test123, Packing Slip: Test123\",\n            \"documentDate\": \"2021-03-02\",\n            \"documentNumber\": \"Test123\",\n            \"description\": \"Purchase\",\n            \"memo\": \"PO #Test123, Packing Slip: Test123\",\n            \"apAccountNumber\": \"\",\n            \"purchaseDate\": \"2021-03-02\",\n            \"company\": {\n                \"id\": 3,\n                \"identifier\": \"ConnectWise\",\n                \"_info\": {\n                    \"company_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/3\"\n                }\n            },\n            \"companyType\": {\n                \"id\": 6,\n                \"name\": \"Vendor\",\n                \"_info\": {\n                    \"type_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/types/6\"\n                }\n            },\n            \"contact\": {\n                \"id\": 2,\n                \"name\": \"Arnie Bellini\",\n                \"_info\": {\n                    \"contact_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/contacts/2\"\n                }\n            },\n            \"site\": {\n                \"id\": 135,\n                \"name\": \"Secondary site\",\n                \"_info\": {\n                    \"site_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/3/sites/135\"\n                }\n            },\n            \"purchaseClass\": \"\",\n            \"freightAmount\": 0,\n            \"freightPackingSlip\": \"Test123\",\n            \"packingSlip\": \"Test123\",\n            \"dropshipFlag\": false,\n            \"currency\": {\n                \"id\": 7,\n                \"symbol\": \"$\",\n                \"currencyCode\": \"USD\",\n                \"decimalSeparator\": \".\",\n                \"numberOfDecimals\": 2,\n                \"thousandsSeparator\": \",\",\n                \"negativeParenthesesFlag\": false,\n                \"displaySymbolFlag\": false,\n                \"currencyIdentifier\": \"Z-US$\",\n                \"displayIdFlag\": false,\n                \"rightAlign\": false,\n                \"name\": \"US Dollars\",\n                \"_info\": {\n                    \"currency_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//finance/currencies/7\"\n                }\n            },\n            \"total\": 310.2,\n            \"billingTerms\": {\n                \"id\": 2,\n                \"name\": \"Net 10\"\n            },\n            \"billingTermsXref\": \"Net 10\",\n            \"dueDays\": 10,\n            \"vendorNumber\": \"\",\n            \"vendorAccountNumber\": \"\",\n            \"vendorInvoiceDate\": \"2021-03-02\",\n            \"vendorInvoiceNumber\": \"\",\n            \"taxAgencyXref\": \"Florida Dept of Revenue\",\n            \"stateTaxXref\": \"USASTE-PS6N0\",\n            \"countyTaxXref\": \"\",\n            \"cityTaxXref\": \"\",\n            \"shipToCompanyAccountNumber\": \"\",\n            \"shipToCompanyType\": {\n                \"id\": 6,\n                \"name\": \"Vendor\",\n                \"_info\": {\n                    \"type_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//company/companies/types/6\"\n                }\n            },\n            \"shipToTaxGroup\": \"\",\n            \"taxCode\": {\n                \"id\": 11,\n                \"name\": \"FL\",\n                \"_info\": {\n                    \"taxCode_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//finance/taxCodes/11\"\n                }\n            },\n            \"taxGroupRate\": 0.06,\n            \"useAvalaraTaxFlag\": false,\n            \"purchaseHeaderTaxGroup\": \"State\",\n            \"purchaseHeaderTaxableFlag\": false,\n            \"purchaseHeaderFreightTaxableFlag\": false,\n            \"taxLevels\": [\n                {\n                    \"taxCodeXref\": \"USASTE-PS6N0\",\n                    \"taxLevel\": 1\n                },\n                {\n                    \"taxCodeXref\": \"\",\n                    \"taxLevel\": 2\n                },\n                {\n                    \"taxCodeXref\": \"\",\n                    \"taxLevel\": 3\n                },\n                {\n                    \"taxCodeXref\": \"\",\n                    \"taxLevel\": 4\n                },\n                {\n                    \"taxCodeXref\": \"\",\n                    \"taxLevel\": 5\n                },\n                {\n                    \"taxCodeXref\": \"\",\n                    \"taxLevel\": 6\n                }\n            ],\n            \"purchaseDetail\": [\n                {\n                    \"id\": 277,\n                    \"documentDate\": \"3/2/2021 11:52:37 AM\",\n                    \"glClass\": \"\",\n                    \"glTypeId\": \"RP\",\n                    \"glItemId\": \"\",\n                    \"salesCode\": \"\",\n                    \"description\": \"Purchase\",\n                    \"cost\": 300,\n                    \"memo\": \"Workstation\",\n                    \"taxNote\": \"\",\n                    \"vendorNumber\": \"\",\n                    \"accountNumber\": \"Hardware Sales\",\n                    \"costAccountNumber\": \"\",\n                    \"inventoryAccountNumber\": \"\",\n                    \"vendorAccountNumber\": \"\",\n                    \"item\": {\n                        \"id\": 748,\n                        \"identifier\": \"Workstation\",\n                        \"_info\": {\n                            \"catalog_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/catalog/748\"\n                        }\n                    },\n                    \"itemDescription\": \"Workstation\",\n                    \"salesDescription\": \"Network Certified Workstation\\r\\nIntel 1.8 GHZ Pentium 4  Processor with 512k cache\\r\\nHigh Speed Motherboard 400/533mhz bus\\r\\n  32 Bit PCI Bus Mastering Architecture\\r\\n  Intel ChipSet \\r\\n  Shared AGP Videot / 4 USB 2.0 Ports\\r\\n  1 Mouse / 1 Parallel / 2 Serial  Ports  10/100 Ethernet LAN Adapter  Audio/Sound Adapter\\r\\n1200 Megabytes of High Speed DDR SDRAM Memory\\r\\n300 Watt Power Supply\\r\\n40 Gigabyte Hard Drive\\r\\n  Ultra Enhanced IDE Interface\\r\\n   9.5 Millisecond Access Time\\r\\nCD-ROM Player Internal 52x Speed\\r\\n  Enhanced IDE Interface\\r\\n1.44 Megabyte Floppy Drive 3.5\\\"\\r\\n104 Key Windows Enhanced Keyboard\\r\\nOptical Three Button Mouse with Scroll Wheel - PS2/USB\\r\\n Windows XP Professional with CD\",\n                    \"taxable\": false,\n                    \"itemPrice\": 0,\n                    \"itemCost\": 75,\n                    \"unitOfMeasure\": {\n                        \"id\": 13,\n                        \"name\": \"Each\",\n                        \"_info\": {\n                            \"uom_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/unitOfMeasures/13\"\n                        }\n                    },\n                    \"quantity\": -4,\n                    \"total\": -300,\n                    \"currency\": {\n                        \"id\": 7,\n                        \"symbol\": \"$\",\n                        \"currencyCode\": \"USD\",\n                        \"decimalSeparator\": \".\",\n                        \"numberOfDecimals\": 2,\n                        \"thousandsSeparator\": \",\",\n                        \"negativeParenthesesFlag\": false,\n                        \"displaySymbolFlag\": false,\n                        \"currencyIdentifier\": \"Z-US$\",\n                        \"displayIdFlag\": false,\n                        \"rightAlign\": false,\n                        \"name\": \"US Dollars\",\n                        \"_info\": {\n                            \"currency_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//finance/currencies/7\"\n                        }\n                    },\n                    \"serializedFlag\": false,\n                    \"serialNumbers\": \"\",\n                    \"dropShippedFlag\": false,\n                    \"lineNumber\": 1,\n                    \"warehouseBin\": {\n                        \"id\": 1,\n                        \"name\": \"Default\",\n                        \"_info\": {\n                            \"warehouseBin_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/warehouseBins/1\"\n                        }\n                    },\n                    \"subCategory\": {\n                        \"id\": 42,\n                        \"name\": \"Workstation\",\n                        \"_info\": {\n                            \"subCategory_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/subcategories/42\"\n                        }\n                    },\n                    \"shipmentMethod\": {\n                        \"id\": 3,\n                        \"name\": \"FedEx Ground\"\n                    },\n                    \"itemTypeXref\": \"\",\n                    \"inventoryXref\": \"\",\n                    \"cogsXref\": \"\",\n                    \"uomScheduleXref\": \"DEFAULT\",\n                    \"priceLevelXref\": \"DEFAULT\",\n                    \"locationXref\": \"DEFAULT\",\n                    \"purchaseHeaderTaxGroup\": \"State\",\n                    \"taxCodeXref\": \"\",\n                    \"taxRate\": 0,\n                    \"taxAgencyXref\": \"\"\n                },\n                {\n                    \"id\": 278,\n                    \"documentDate\": \"3/2/2021 11:53:11 AM\",\n                    \"glClass\": \"\",\n                    \"glTypeId\": \"RP\",\n                    \"glItemId\": \"\",\n                    \"salesCode\": \"\",\n                    \"description\": \"Purchase\",\n                    \"cost\": 10.2,\n                    \"memo\": \"10ft Patch Cable\",\n                    \"taxNote\": \"\",\n                    \"vendorNumber\": \"\",\n                    \"accountNumber\": \"Product Sales\",\n                    \"costAccountNumber\": \"\",\n                    \"inventoryAccountNumber\": \"\",\n                    \"vendorAccountNumber\": \"\",\n                    \"item\": {\n                        \"id\": 743,\n                        \"identifier\": \"10ft Patch Cable\",\n                        \"_info\": {\n                            \"catalog_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/catalog/743\"\n                        }\n                    },\n                    \"itemDescription\": \"10ft Patch Cable\",\n                    \"salesDescription\": \"10ft Patch Cat5E Cable\",\n                    \"taxable\": false,\n                    \"itemPrice\": 5,\n                    \"itemCost\": 3.4,\n                    \"unitOfMeasure\": {\n                        \"id\": 13,\n                        \"name\": \"Each\",\n                        \"_info\": {\n                            \"uom_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/unitOfMeasures/13\"\n                        }\n                    },\n                    \"quantity\": -3,\n                    \"total\": -10.2,\n                    \"currency\": {\n                        \"id\": 7,\n                        \"symbol\": \"$\",\n                        \"currencyCode\": \"USD\",\n                        \"decimalSeparator\": \".\",\n                        \"numberOfDecimals\": 2,\n                        \"thousandsSeparator\": \",\",\n                        \"negativeParenthesesFlag\": false,\n                        \"displaySymbolFlag\": false,\n                        \"currencyIdentifier\": \"Z-US$\",\n                        \"displayIdFlag\": false,\n                        \"rightAlign\": false,\n                        \"name\": \"US Dollars\",\n                        \"_info\": {\n                            \"currency_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//finance/currencies/7\"\n                        }\n                    },\n                    \"serializedFlag\": false,\n                    \"serialNumbers\": \"\",\n                    \"dropShippedFlag\": false,\n                    \"lineNumber\": 2,\n                    \"warehouseBin\": {\n                        \"id\": 1,\n                        \"name\": \"Default\",\n                        \"_info\": {\n                            \"warehouseBin_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/warehouseBins/1\"\n                        }\n                    },\n                    \"subCategory\": {\n                        \"id\": 24,\n                        \"name\": \"Miscellaneous\",\n                        \"_info\": {\n                            \"subCategory_href\": \"https://api-staging.connectwisedev.com/v4_6_release/apis/3.0//procurement/subcategories/24\"\n                        }\n                    },\n                    \"shipmentMethod\": {\n                        \"id\": 3,\n                        \"name\": \"FedEx Ground\"\n                    },\n                    \"itemTypeXref\": \"\",\n                    \"inventoryXref\": \"\",\n                    \"cogsXref\": \"\",\n                    \"uomScheduleXref\": \"DEFAULT\",\n                    \"priceLevelXref\": \"DEFAULT\",\n                    \"locationXref\": \"DEFAULT\",\n                    \"purchaseHeaderTaxGroup\": \"State\",\n                    \"taxCodeXref\": \"\",\n                    \"taxRate\": 0,\n                    \"taxAgencyXref\": \"\"\n                }\n            ],\n            \"purchaseDetailTax\": []\n        }\n    ],\n    \"adjustmentTransactions\": [],\n    \"inventoryTransfers\": []\n}"
-						}
-					]
-				},
-				{
-					"name": "Export Invoices Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-27\",\r\n  \"glInterfaceIdentifier\": \"SC2020-04-27\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportInvoicesFlag\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"export"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Inventory",
-			"item": [
-				{
-					"name": "Warehouses",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouses",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"warehouses"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Warehouse",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"TEST\",\r\n    \"company\": {\r\n        \"identifier\": \"YourCompany\"\r\n    },\r\n    \"location\": {\r\n        \"id\": 2\r\n    },\r\n    \"department\": {\r\n        \"id\": 10,\r\n        \"identifier\": \"Services\"\r\n    },\r\n    \"locationDefaultFlag\": false,\r\n    \"overallDefaultFlag\": false,\r\n    \"inactiveFlag\": false,\r\n    \"lockedFlag\": false,\r\n    \"currency\": {\r\n        \"currencyCode\": \"USD\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouses",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"warehouses"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Warehouse Bins",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2022.1",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouseBins?fields=id,name,warehouse/id,warehouse/name,defaultFlag,location/id,location/name",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"warehouseBins"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,warehouse/id,warehouse/name,defaultFlag,location/id,location/name"
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Warehouse Bins",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Test3\",\r\n    \"warehouse\": {\r\n        \"name\": \"TEST\"\r\n    },\r\n    \"location\": {\r\n        \"name\": \"Tampa Office\"\r\n    },\r\n    \"department\": {\r\n        \"name\": \"Professional Services\"\r\n    },\r\n    \"minQuantity\": 0.00,\r\n    \"maxQuantity\": 0.00,\r\n    \"length\": 0.0,\r\n    \"width\": 0.0,\r\n    \"height\": 0.0,\r\n    \"weight\": 0.0,\r\n    \"defaultFlag\": true,\r\n    \"inactiveFlag\": false,\r\n    \"quantityOnHand\": 0,\r\n    \"company\": {\r\n        \"name\": \"Your Company\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouseBins",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"warehouseBins"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Products",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/catalog",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"catalog"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Product",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"identifier\": \"Miscellaneous2\",\r\n        \"description\": \"Miscellaneous2\",\r\n        \"inactiveFlag\": false,\r\n        \"subcategory\": {\r\n            \"name\": \"Miscellaneous\"\r\n        },\r\n        \"type\": {\r\n            \"name\": \"Miscellaneous\"\r\n        },\r\n        \"productClass\": \"NonInventory\",\r\n        \"serializedFlag\": false,\r\n        \"serializedCostFlag\": false,\r\n        \"phaseProductFlag\": false,\r\n        \"unitOfMeasure\": {\r\n            \"name\": \"Each\"\r\n        },\r\n        \"minStockLevel\": 0,\r\n        \"price\": 1.000000,\r\n        \"cost\": 0.500000,\r\n        \"taxableFlag\": false,\r\n        \"dropShipFlag\": false,\r\n        \"specialOrderFlag\": false,\r\n        \"customerDescription\": \"Another Miscellaneous Item\",\r\n        \"manufacturerPartNumber\": \"\",\r\n        \"recurringFlag\": false,\r\n        \"recurringOneTimeFlag\": false,\r\n        \"calculatedPriceFlag\": false,\r\n        \"calculatedCostFlag\": false,\r\n        \"category\": {\r\n            \"name\": \"Miscellaneous\"\r\n        }\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/catalog",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"catalog"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Product",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"identifier\": \"Miscellaneous3\",\r\n        \"description\": \"Miscellaneous3\",\r\n        \"inactiveFlag\": false,\r\n        \"subcategory\": {\r\n            \"name\": \"Miscellaneous\"\r\n        },\r\n        \"type\": {\r\n            \"name\": \"Miscellaneous\"\r\n        },\r\n        \"productClass\": \"NonInventory\",\r\n        \"serializedFlag\": false,\r\n        \"serializedCostFlag\": false,\r\n        \"phaseProductFlag\": false,\r\n        \"unitOfMeasure\": {\r\n            \"name\": \"Each\"\r\n        },\r\n        \"minStockLevel\": 0,\r\n        \"price\": 2.000000,\r\n        \"cost\": 0.500000,\r\n        \"taxableFlag\": false,\r\n        \"dropShipFlag\": false,\r\n        \"specialOrderFlag\": false,\r\n        \"customerDescription\": \"Another Miscellaneous Item\",\r\n        \"manufacturerPartNumber\": \"\",\r\n        \"recurringFlag\": false,\r\n        \"recurringOneTimeFlag\": false,\r\n        \"calculatedPriceFlag\": false,\r\n        \"calculatedCostFlag\": false,\r\n        \"category\": {\r\n            \"name\": \"Miscellaneous\"\r\n        }\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/catalog/751",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"catalog",
-								"751"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Unposted Inventory Adjustments",
+					"name": "01 Incremental Customers (Company)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -746,490 +33,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedprocurement?conditions=procurementType='Adjustment'",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"unpostedprocurement"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,products",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "procurementType='Adjustment'"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Inventory Adjustments",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/adjustments?conditions=id in (2,3)",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"adjustments"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,products",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "id in (2,3)"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Export Inventory Adjustment Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-2s77\",\r\n  \"glInterfaceIdentifier\": \"SC2020s-04-277\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportProductsFlag\": true,\r\n  \"includedProductIds\": [\r\n    \"1-adjustment\"\r\n  ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"export"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Unposted Inventory Transfers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedprocurement?conditions=procurementType='Transfer'",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"unpostedprocurement"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,products",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "procurementType='Transfer'"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Export Inventory Transfer Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-2s77\",\r\n  \"glInterfaceIdentifier\": \"SC2020s-04-277\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportProductsFlag\": true,\r\n  \"includedProductIds\": [\r\n    \"1-adjustment\"\r\n  ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"export"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Item",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/name\",\r\n        \"value\": \"Big Design, Incs.\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/addressLine1\",\r\n        \"value\": \"666 Devil's Way\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/addressLine2\",\r\n        \"value\": \"Suite 666\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/city\",\r\n        \"value\": \"Fargo\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/zip\",\r\n        \"value\": \"58104\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/state\",\r\n        \"value\": \"ND\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/phoneNumber\",\r\n        \"value\": \"1112223333\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/taxIdentifier\",\r\n        \"value\": \"\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/invoiceToEmailAddress\",\r\n        \"value\": \"patrick.love@bigdesign.com\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/country/id\",\r\n        \"value\": 3\r\n    }\r\n]"
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/companies/4",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"company",
-								"companies",
-								"4"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Service",
-			"item": [
-				{
-					"name": "Tickets",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/service/tickets?pageSize=1",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"service",
-								"tickets"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								},
-								{
-									"key": "pageSize",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Tickets",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/time/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket')&pageSize=1",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"time",
-								"entries"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket')"
-								},
-								{
-									"key": "pageSize",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Service Time Entry",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/time/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket')&pageSize=1",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"time",
-								"entries"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket')"
-								},
-								{
-									"key": "pageSize",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Sales",
-			"item": [
-				{
-					"name": "Companies - Customers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/companies?childconditions=types/id=1&conditions=deletedFlag=false",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/companies?childconditions=types/id=1&conditions=lastUpdated>=[2021-06-01T15:25:41Z] and deletedFlag=false",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1253,7 +57,22 @@
 								},
 								{
 									"key": "conditions",
-									"value": "deletedFlag=false"
+									"value": "lastUpdated>=[2021-06-01T15:25:41Z] and deletedFlag=false"
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -1360,161 +179,17 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Expense",
+			"item": [
 				{
-					"name": "Create Posted Invoice",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"invoiceNumber\": \"Ethan6\",\r\n    \"territoryId\": 2,\r\n    \"type\": \"Miscellaneous\",\r\n    \"status\": {\r\n        \"name\": \"Active\"\r\n    },\r\n    \"company\": {\r\n        \"id\": 30414\r\n    }\r\n}"
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"invoices"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
+					"name": "01 Incremental Members",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
 					},
-					"response": []
-				},
-				{
-					"name": "Create Invoice Payment",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"type\": \"P\",\r\n    \"amount\": 500.00,\r\n    \"invoice\": {\r\n        \"id\": 55\r\n    }\r\n}"
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices/55/payments",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"invoices",
-								"55",
-								"payments"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Posted Invoice Product",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"sequenceNumber\": 2,\r\n    \"customerDescription\":\"test inventory\",\r\n    \"quantity\": 2,\r\n    \"billableOption\": \"Billable\",\r\n    \"company\": {\r\n        \"id\": 30414\r\n    },\r\n    \"catalogItem\": {\r\n        \"id\": 16\r\n    },\r\n    \"invoice\": {\r\n        \"id\": 6\r\n    }\r\n}"
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/products",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"products"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Posted Invoices",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1530,8 +205,17 @@
 								"disabled": true
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/system/members?fields=id,identifier&conditions=inactiveFlag=false and lastUpdated>=[2023-04-20T09:23:46Z]",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1540,19 +224,37 @@
 								"{{Release}}",
 								"apis",
 								"3.0",
-								"finance",
-								"invoices"
+								"system",
+								"members"
 							],
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
+									"value": "id,identifier"
+								},
+								{
+									"key": "conditions",
+									"value": "inactiveFlag=false and lastUpdated>=[2023-04-20T09:23:46Z]"
 								},
 								{
 									"key": "childConditions",
 									"value": "invoice/invoiceNumber=1003",
 									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -1560,7 +262,10 @@
 					"response": []
 				},
 				{
-					"name": "Unposted Invoices",
+					"name": "01 List Unposted Expenses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1576,8 +281,17 @@
 								"disabled": true
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedinvoices",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedexpenses?conditions=classification='Reimbursable'",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1588,7 +302,126 @@
 								"3.0",
 								"finance",
 								"accounting",
-								"unpostedinvoices"
+								"unpostedexpenses"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,expenseDetailId,classification",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "classification='Reimbursable'"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 Export Expenses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"batchIdentifier\": \"0\",\r\n    \"glInterfaceIdentifier\": \"0\",\r\n    \"locationId\": 0,\r\n    \"summarizeInvoices\": \"Detailed\",\r\n    \"exportExpensesFlag\": true,\r\n    \"includedExpenseIds\": [\r\n       21\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Expense Batch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchIdentifier\": \"SCExpenseTest\",\r\n  \"glInterfaceIdentifier\": \"SCExpenseTest\",\r\n  \"exportInvoicesFlag\": false,\r\n  \"exportExpensesFlag\": true,\r\n  \"exportProductsFlag\": false,\r\n  \"processedRecordIds\": [5],\r\n  \"summarizeExpenses\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
 							],
 							"query": [
 								{
@@ -1605,9 +438,14 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
 				{
-					"name": "contacts",
+					"name": "01 All Warehouse Bins",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1618,13 +456,12 @@
 							},
 							{
 								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
+								"value": "2022.1",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/contacts",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouseBins?fields=id,name,warehouse/id,warehouse/name,defaultFlag,location/id,location/name",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1633,13 +470,17 @@
 								"{{Release}}",
 								"apis",
 								"3.0",
-								"company",
-								"contacts"
+								"procurement",
+								"warehouseBins"
 							],
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id,name,warehouse/id,warehouse/name,defaultFlag,location/id,location/name"
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
@@ -1649,8 +490,18 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
 									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -1658,7 +509,7 @@
 					"response": []
 				},
 				{
-					"name": "Invoices to not export",
+					"name": "01 Incremental Items",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1675,7 +526,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices?Conditions=status/name='Closed' and id in (1,2,55)",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/catalog?conditions=lastUpdated>=[2021-06-01T15:25:41Z]",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1684,75 +535,37 @@
 								"{{Release}}",
 								"apis",
 								"3.0",
-								"finance",
-								"invoices"
+								"procurement",
+								"catalog"
 							],
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								},
-								{
-									"key": "Conditions",
-									"value": "status/name='Closed' and id in (1,2,55)"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Invoice Payment",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices/3/payments",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"invoices",
-								"3",
-								"payments"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
+									"value": "id,name",
 									"disabled": true
 								},
 								{
 									"key": "conditions",
-									"value": "invoiceNumber='5'",
+									"value": "lastUpdated>=[2021-06-01T15:25:41Z]"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -1761,7 +574,201 @@
 					"response": []
 				},
 				{
-					"name": "Update Invoice Payment",
+					"name": "01 Incremental Adjustment Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/adjustments?conditions=closedFlag = true and closedDate >= [2021-06-01T15:25:41Z]",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"procurement",
+								"adjustments"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,products",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "closedFlag = true and closedDate >= [2021-06-01T15:25:41Z]"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 Post Incremental Adjustment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedprocurement?fields=id,unpostedProductId,description&conditions=procurementType='Adjustment' and unpostedProductId in (1-adjustment,)",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"unpostedprocurement"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,unpostedProductId,description"
+								},
+								{
+									"key": "conditions",
+									"value": "procurementType='Adjustment' and unpostedProductId in (1-adjustment,)"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"identifier\": \"Miscellaneous2\",\r\n        \"description\": \"Miscellaneous2\",\r\n        \"inactiveFlag\": false,\r\n        \"subcategory\": {\r\n            \"name\": \"Miscellaneous\"\r\n        },\r\n        \"type\": {\r\n            \"name\": \"Miscellaneous\"\r\n        },\r\n        \"productClass\": \"NonInventory\",\r\n        \"serializedFlag\": false,\r\n        \"serializedCostFlag\": false,\r\n        \"phaseProductFlag\": false,\r\n        \"unitOfMeasure\": {\r\n            \"name\": \"Each\"\r\n        },\r\n        \"minStockLevel\": 0,\r\n        \"price\": 1.000000,\r\n        \"cost\": 0.500000,\r\n        \"taxableFlag\": false,\r\n        \"dropShipFlag\": false,\r\n        \"specialOrderFlag\": false,\r\n        \"customerDescription\": \"Another Miscellaneous Item\",\r\n        \"manufacturerPartNumber\": \"\",\r\n        \"recurringFlag\": false,\r\n        \"recurringOneTimeFlag\": false,\r\n        \"calculatedPriceFlag\": false,\r\n        \"calculatedCostFlag\": false,\r\n        \"category\": {\r\n            \"name\": \"Miscellaneous\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/catalog",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"procurement",
+								"catalog"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name,invoice/id",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -1775,19 +782,19 @@
 								"value": "2020.2",
 								"type": "text",
 								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/amount\",\r\n        \"value\": \"450\"\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/cost\",\r\n        \"value\": 10.11\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/description\",\r\n        \"value\": \"Sample Item\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/inactiveFlag\",\r\n        \"value\": false\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/integrationXRef\",\r\n        \"value\": \"Sample123\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/price\",\r\n        \"value\": 20.22\r\n    }\r\n]"
 						},
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices/3/payments/1",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/catalog/751",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1796,16 +803,60 @@
 								"{{Release}}",
 								"apis",
 								"3.0",
-								"finance",
-								"invoices",
-								"3",
-								"payments",
-								"1"
+								"procurement",
+								"catalog",
+								"751"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Warehouses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouses",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"procurement",
+								"warehouses"
 							],
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
@@ -1814,22 +865,27 @@
 									"disabled": true
 								},
 								{
-									"key": "conditions",
-									"value": "invoiceNumber='5'",
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Procurement",
-			"item": [
+				},
 				{
-					"name": "Companies - Vendors",
+					"name": "Unposted Inventory Transfers",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1851,7 +907,293 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/companies?conditions=isVendorFlag=true",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedprocurement?conditions=procurementType='Transfer'",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"unpostedprocurement"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,products",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "procurementType='Transfer'"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export Inventory Adjustment Batch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-2s77\",\r\n  \"glInterfaceIdentifier\": \"SC2020s-04-277\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportProductsFlag\": true,\r\n  \"includedProductIds\": [\r\n    \"1-adjustment\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name,invoice/id",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Warehouse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"TEST\",\r\n    \"company\": {\r\n        \"identifier\": \"YourCompany\"\r\n    },\r\n    \"location\": {\r\n        \"id\": 2\r\n    },\r\n    \"department\": {\r\n        \"id\": 10,\r\n        \"identifier\": \"Services\"\r\n    },\r\n    \"locationDefaultFlag\": false,\r\n    \"overallDefaultFlag\": false,\r\n    \"inactiveFlag\": false,\r\n    \"lockedFlag\": false,\r\n    \"currency\": {\r\n        \"currencyCode\": \"USD\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouses",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"procurement",
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Warehouse Bins",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test3\",\r\n    \"warehouse\": {\r\n        \"name\": \"TEST\"\r\n    },\r\n    \"location\": {\r\n        \"name\": \"Tampa Office\"\r\n    },\r\n    \"department\": {\r\n        \"name\": \"Professional Services\"\r\n    },\r\n    \"minQuantity\": 0.00,\r\n    \"maxQuantity\": 0.00,\r\n    \"length\": 0.0,\r\n    \"width\": 0.0,\r\n    \"height\": 0.0,\r\n    \"weight\": 0.0,\r\n    \"defaultFlag\": true,\r\n    \"inactiveFlag\": false,\r\n    \"quantityOnHand\": 0,\r\n    \"company\": {\r\n        \"name\": \"Your Company\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/warehouseBins",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"procurement",
+								"warehouseBins"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name,invoice/id",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export Inventory Transfer Batch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-2s77\",\r\n  \"glInterfaceIdentifier\": \"SC2020s-04-277\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportProductsFlag\": true,\r\n  \"includedProductIds\": [\r\n    \"1-adjustment\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name,invoice/id",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Procurement",
+			"item": [
+				{
+					"name": "01 Incremental Vendors (Company)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/companies?conditions=lastUpdated>=[2021-06-01T15:25:41Z] and isVendorFlag=true and deletedFlag=false",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -1870,14 +1212,145 @@
 									"disabled": true
 								},
 								{
+									"key": "conditions",
+									"value": "lastUpdated>=[2021-06-01T15:25:41Z] and isVendorFlag=true and deletedFlag=false"
+								},
+								{
 									"key": "childconditions",
 									"value": "types/id=6",
 									"disabled": true
 								},
 								{
-									"key": "conditions",
-									"value": "isVendorFlag=true"
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "01 List Unposted Procurements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedprocurement?conditions=procurementType='Purchase'",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"unpostedprocurement"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,products",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "procurementType='Purchase'"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						},
+						"description": "After all Items have been recieved and marked closed the POs come here."
+					},
+					"response": []
+				},
+				{
+					"name": "02 Export Procurements",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-04-2177\",\r\n  \"glInterfaceIdentifier\": \"SC2020-04-2717\",\r\n  \"locationId\": 0,\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportProductsFlag\": true,\r\n  \"includedProductIds\": [\"3-Test123-purchase\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
 							]
 						}
 					},
@@ -1936,7 +1409,7 @@
 				{
 					"name": "Update Vendor",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "ClientId",
@@ -1956,7 +1429,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identifier\": \"TESTvendor\",\r\n    \"name\": \"TESTs\",\r\n    \"status\": {\r\n        \"name\": \"Active\"\r\n    },\r\n    \"addressLine1\": \"23 Central Avenue\",\r\n    \"addressLine2\": \"Suite 200\",\r\n    \"city\": \"Tampa\",\r\n    \"state\": \"FL\",\r\n    \"zip\": \"33618\",\r\n    \"phoneNumber\": \"8139881000\",\r\n    \"website\": \"http://www.BigDesign.com\",\r\n    \"territory\": {\r\n        \"name\": \"Corporate\"\r\n    },\r\n    \"site\": {\r\n        \"name\": \"Main\"\r\n    },\r\n    \"accountNumber\": \"TEST\",\r\n    \"dateAcquired\": \"2005-03-21T15:43:44Z\",\r\n    \"annualRevenue\": 2000000.00,\r\n    \"numberOfEmployees\": 42,\r\n    \"leadSource\": \"Microsoft Tradeshow\",\r\n    \"leadFlag\": false,\r\n    \"unsubscribeFlag\": false,\r\n    \"taxCode\": {\r\n        \"name\": \"State\"\r\n    },\r\n    \"billingTerms\": {\r\n        \"name\": \"Net 10\"\r\n    },\r\n    \"billToCompany\": {\r\n        \"id\": 134\r\n    },\r\n    \"invoiceToEmailAddress\": \"patrick.love@bigdesign.com\",\r\n    \"isVendorFlag\": true\r\n}"
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/addressLine1\",\r\n        \"value\": \"23 Central Avenue\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/addressLine2\",\r\n        \"value\": \"Suite 200\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/city\",\r\n        \"value\": \"Tampa\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/country/id\",\r\n        \"value\": 1\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/name\",\r\n        \"value\": \"TESTs\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/phoneNumber\",\r\n        \"value\": \"8139881000\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/state\",\r\n        \"value\": \"FL\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/taxIdentifier\",\r\n        \"value\": \"\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/zip\",\r\n        \"value\": \"33618\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/vendorIdentifier\",\r\n        \"value\": \"TESTvendor\"\r\n    }\r\n]"
 						},
 						"url": {
 							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/companies/134",
@@ -1984,9 +1457,9 @@
 					"response": []
 				},
 				{
-					"name": "Unposted Procurements",
+					"name": "Post Procurement Batch",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "ClientId",
@@ -1998,15 +1471,19 @@
 								"value": "2020.2",
 								"type": "text",
 								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"batchIdentifier\": \"SC-ADJUSTMENT-2023-08-18T14:10:55\",\r\n    \"glInterfaceIdentifier\": \"SC-ADJUSTMENT-2023-08-18T14:10:55\",\r\n    \"exportInvoicesFlag\": false,\r\n    \"exportExpensesFlag\": false,\r\n    \"exportProductsFlag\": true,\r\n    \"processedRecordIds\": [\r\n        319,\r\n        324,\r\n        576,\r\n        584\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedprocurement?conditions=procurementType='Purchase'",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/batches",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2017,26 +1494,14 @@
 								"3.0",
 								"finance",
 								"accounting",
-								"unpostedprocurement"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,products",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "procurementType='Purchase'"
-								}
+								"batches"
 							]
-						},
-						"description": "After all Items have been recieved and marked closed the POs come here."
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "Purchase Orders",
+					"name": "List Purchase Orders",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2072,8 +1537,28 @@
 									"disabled": true
 								},
 								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
 									"key": "childConditions",
 									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2138,307 +1623,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Posted Invoice Lines",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/products?pageSize=1000",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"procurement",
-								"products"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "invoice/id>0",
-									"disabled": true
-								},
-								{
-									"key": "pageSize",
-									"value": "1000"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Expense",
-			"item": [
-				{
-					"name": "Unposted Expenses",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedexpenses?coditons=id in (574)",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"unpostedexpenses"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,expenseDetailId,classification",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "classification='Reimbursable'",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "expenseReport/dateStart<[2021-04-05T00:00:00Z]",
-									"disabled": true
-								},
-								{
-									"key": "coditons",
-									"value": "id in (574)"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Members",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/system/members?fields=id,identifier&conditions=inactiveFlag=false and lastUpdated>='2020-04-20T09:23:46Z'",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"system",
-								"members"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,identifier"
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								},
-								{
-									"key": "conditions",
-									"value": "inactiveFlag=false and lastUpdated>='2020-04-20T09:23:46Z'"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Export Expenses Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchIdentifier\": \"SC2020-0-4-29\",\r\n  \"glInterfaceIdentifier\": \"SC2020-04-29\",\r\n  \"locationId\": 0,\r\n  \"includedExpenseIds\": [],\r\n  \"summarizeInvoices\": \"Detailed\",\r\n  \"exportExpensesFlag\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"export"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Post Invoices Batch",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "ClientId",
-								"value": "{{ClientId}}",
-								"type": "text"
-							},
-							{
-								"key": "version",
-								"value": "2020.2",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchIdentifier\": \"SCExpenseTest\",\r\n  \"glInterfaceIdentifier\": \"SCExpenseTest\",\r\n  \"locationId\": 0,\r\n  \"processedRecordIds\": [5],\r\n  \"summarizeInvoices\": \"Default\",\r\n  \"exportExpensesFlag\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
-							"protocol": "https",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"{{Release}}",
-								"apis",
-								"3.0",
-								"finance",
-								"accounting",
-								"export"
-							],
-							"query": [
-								{
-									"key": "fields",
-									"value": "id,name,invoice/id",
-									"disabled": true
-								},
-								{
-									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -2446,7 +1630,7 @@
 			"name": "Project",
 			"item": [
 				{
-					"name": "Projects",
+					"name": "List Projects",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2478,12 +1662,98 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
 									"key": "childConditions",
 									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Project Tickets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/project/tickets",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"project",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2534,7 +1804,62 @@
 					"response": []
 				},
 				{
-					"name": "Project Tickets",
+					"name": "Update Project",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.3",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/name\",\r\n        \"value\": \"Network Upgrade v2\"\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/project/projects/4",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"project",
+								"projects",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales",
+			"item": [
+				{
+					"name": "01 List Unposted Invoices",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2551,7 +1876,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/project/tickets",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/unpostedinvoices",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2560,8 +1885,427 @@
 								"{{Release}}",
 								"apis",
 								"3.0",
-								"project",
-								"tickets"
+								"finance",
+								"accounting",
+								"unpostedinvoices"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 Export Invoices",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"batchIdentifier\": \"01\",\r\n    \"glInterfaceIdentifier\": \"01\",\r\n    \"summarizeInvoices\": \"Default\",\r\n    \"exportInvoicesFlag\": true,\r\n    \"includedInvoiceIds\": [\r\n    123\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Sales Batch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"batchIdentifier\": \"SCSalesTest\",\r\n  \"glInterfaceIdentifier\": \"SCSalesTest\",\r\n  \"exportInvoicesFlag\": true,\r\n  \"exportExpensesFlag\": false,\r\n  \"exportProductsFlag\": false,\r\n  \"processedRecordIds\": [1,2,3,4],\r\n  \"summarizeExpenses\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/export",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Invoice Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"P\",\r\n    \"amount\": 500.00,\r\n    \"invoice\": {\r\n        \"id\": 55\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices/55/payments",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"invoices",
+								"55",
+								"payments"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Invoice Payment",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/amount\",\r\n        \"value\": \"450\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices/3/payments/1",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"invoices",
+								"3",
+								"payments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sales Invoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceNumber\": \"Ethan7\",\r\n    \"territoryId\": 2,\r\n    \"type\": \"Miscellaneous\",\r\n    \"status\": {\r\n        \"name\": \"Active\"\r\n    },\r\n    \"company\": {\r\n        \"id\": 4\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"invoices"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sales Invoice Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sequenceNumber\": 1,\r\n    \"customerDescription\":\"test inventory\",\r\n    \"quantity\": 2,\r\n    \"billableOption\": \"Billable\",\r\n    \"company\": {\r\n        \"id\": 4\r\n    },\r\n    \"catalogItem\": {\r\n        \"id\": 741\r\n    },\r\n    \"invoice\": {\r\n        \"id\": 79\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/procurement/products",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"procurement",
+								"products"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Invoices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/invoices",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"invoices"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name,invoice/id",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Contacts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/contacts",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"company",
+								"contacts"
 							],
 							"query": [
 								{
@@ -2572,6 +2316,212 @@
 								{
 									"key": "childConditions",
 									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "List Tickets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/service/tickets",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"service",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Service Time Entry",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/time/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket')&orderBy=id desc",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"time",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket')"
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Agreements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/agreements",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"agreements"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2617,7 +2567,12 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
@@ -2627,7 +2582,17 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2653,7 +2618,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/countries/?fields=id&conditions=countryCode='CA'",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/countries/",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2669,7 +2634,13 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id"
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "countryCode='CA'",
+									"disabled": true
 								},
 								{
 									"key": "childConditions",
@@ -2678,12 +2649,18 @@
 								},
 								{
 									"key": "pageSize",
-									"value": "2",
+									"value": "1000",
 									"disabled": true
 								},
 								{
-									"key": "conditions",
-									"value": "countryCode='CA'"
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -2723,7 +2700,12 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
@@ -2733,7 +2715,17 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2774,7 +2766,12 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
@@ -2784,7 +2781,17 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2810,7 +2817,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/taxcodes?fields=id&conditions=description='State'",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/taxcodes",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2825,7 +2832,13 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id"
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "description='State'",
+									"disabled": true
 								},
 								{
 									"key": "childConditions",
@@ -2834,12 +2847,18 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
 									"disabled": true
 								},
 								{
-									"key": "conditions",
-									"value": "description='State'"
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -2864,7 +2883,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/taxcodes/1/taxcodelevels",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/taxcodes/{{ID}}/taxcodelevels",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2875,23 +2894,38 @@
 								"3.0",
 								"finance",
 								"taxcodes",
-								"1",
+								"{{ID}}",
 								"taxcodelevels"
 							],
 							"query": [
 								{
 									"key": "fields",
-									"value": "id,name,invoice/id",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
 									"disabled": true
 								},
 								{
 									"key": "childConditions",
-									"value": "invoice/invoiceNumber=1003",
+									"value": "ivnvoice/invoiceNumber=1003",
 									"disabled": true
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
 									"disabled": true
 								}
 							]
@@ -2917,7 +2951,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/system/locations?fields=id&conditions=name='My Accounts'",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/system/locations",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2932,7 +2966,13 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id"
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
 								},
 								{
 									"key": "childConditions",
@@ -2941,12 +2981,18 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
 									"disabled": true
 								},
 								{
-									"key": "conditions",
-									"value": "name='My Accounts'"
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -2971,7 +3017,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/marketDescriptions?fields=id&conditions=name='Financial'",
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/company/marketDescriptions",
 							"protocol": "https",
 							"host": [
 								"{{BaseUrl}}"
@@ -2986,7 +3032,13 @@
 							"query": [
 								{
 									"key": "fields",
-									"value": "id"
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "name='Financial'",
+									"disabled": true
 								},
 								{
 									"key": "childConditions",
@@ -2995,12 +3047,158 @@
 								},
 								{
 									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
 									"value": "1",
 									"disabled": true
 								},
 								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Batch Management",
+			"item": [
+				{
+					"name": "List Posted Batches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/batches?orderBy=id desc",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"batches"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
 									"key": "conditions",
-									"value": "name='Financial'"
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Posted Batch GL Entries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "2020.2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/finance/accounting/batches/{{ID}}/entries",
+							"protocol": "https",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{Release}}",
+								"apis",
+								"3.0",
+								"finance",
+								"accounting",
+								"batches",
+								"{{ID}}",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,name",
+									"disabled": true
+								},
+								{
+									"key": "conditions",
+									"value": "id = 1",
+									"disabled": true
+								},
+								{
+									"key": "childConditions",
+									"value": "invoice/invoiceNumber=1003",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "id desc",
+									"disabled": true
 								}
 							]
 						}
@@ -3030,58 +3228,6 @@
 						"login",
 						"companyinfo",
 						"eone_f"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Payments - Report",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "ClientId",
-						"value": "{{ClientId}}",
-						"type": "text"
-					},
-					{
-						"key": "version",
-						"value": "2020.2",
-						"type": "text",
-						"disabled": true
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://{{BaseUrl}}/{{Release}}/apis/3.0/system/reports/InvoicePayments",
-					"protocol": "https",
-					"host": [
-						"{{BaseUrl}}"
-					],
-					"path": [
-						"{{Release}}",
-						"apis",
-						"3.0",
-						"system",
-						"reports",
-						"InvoicePayments"
-					],
-					"query": [
-						{
-							"key": "fields",
-							"value": "id,products",
-							"disabled": true
-						},
-						{
-							"key": "childconditions",
-							"value": "types/id=1",
-							"disabled": true
-						}
 					]
 				}
 			},
@@ -3144,6 +3290,11 @@
 		{
 			"key": "Password",
 			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ID",
+			"value": "1",
 			"type": "string"
 		}
 	]
