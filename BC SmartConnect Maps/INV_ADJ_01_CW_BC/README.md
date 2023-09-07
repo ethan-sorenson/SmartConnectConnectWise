@@ -4,6 +4,19 @@ Import CW Inventory Adjustments as BC Item Journal Lines
 ## Overview
 This integration will query for a list of newly closed Inventory Adjustments and create Item Journal Lines for these changes.
 
+```mermaid
+flowchart TD
+    cw1 --> A 
+    A(INV_ADJ_01_CW_BC) -->|"Import Item 
+    Journal Lines"| cw2 --> B
+    B(INV_ADJ_02_CW_BC) -->|"Writeback Ssccessfully 
+    imported records"| cw1
+    cw1[/"CW Inventry
+    Adjustments"\]
+    cw2[\"BC Item Journal
+     Lines"/]
+```
+
 ## Source
 **Filters**
 | Key    | Value |

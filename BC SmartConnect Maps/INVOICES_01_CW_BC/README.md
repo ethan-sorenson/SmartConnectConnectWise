@@ -6,6 +6,19 @@ This integration will query for a list of unprocessed Invoice Ids. This list is 
 
 *Note: The target is a "dummy" file and will not send anything to ConnectWise. It is just a placeholder destination to allow SmartConnect to parse the list of Ids for map 2.*
 
+```mermaid
+flowchart TD
+    cw1 --> A 
+    cw1 --> B
+    A(INVOICES_01_CW_BC) -->|"Get list of 
+    unposted invoices"| cw1
+    B(INVOICES_02_CW_BC) -->|"Import Sales Invoice"| cw2 --> C
+    C(INVOICES_03_CW_BC) --> |"Writeback successfully 
+    imported records"| cw1 
+    cw1[/CW Invoices\]
+    cw2[\BC Sales Invoice/]
+```
+
 ## Source
 **Filters**
 None

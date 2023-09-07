@@ -6,6 +6,19 @@ This integration will writeback the Ids for all successfully imported Inventory 
 
 *Note: The target of this integration is using aggregated grouping to concatenate all ids into a single field. This is controlled by the grouping on the Integration > Source Grouping tab.*
 
+```mermaid
+flowchart TD
+    cw1 --> A 
+    A(INV_ADJ_01_CW_BC) -->|"Import Item 
+    Journal Lines"| cw2 --> B
+    B(INV_ADJ_02_CW_BC) -->|"Writeback sccessfully 
+    imported records"| cw1
+    cw1[/"CW Inventory
+    Adjustments"\]
+    cw2[\"BC Item Journal
+     Lines"/]
+```
+
 ## Source
 **Filters**
 | Key    | Value |

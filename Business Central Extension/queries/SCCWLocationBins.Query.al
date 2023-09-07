@@ -1,3 +1,5 @@
+//Location and Bins query.
+//Used for optimized OData lookups in SmartConnect
 query 64052 LocationBinsQuery
 {
     QueryType = API;

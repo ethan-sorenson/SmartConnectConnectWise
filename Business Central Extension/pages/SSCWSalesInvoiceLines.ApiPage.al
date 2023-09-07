@@ -1,3 +1,4 @@
+#pragma implicitwith disable
 page 64055 "SSCW - Sales Invoice Lines"
 {
     APIVersion = 'v2.0';
@@ -76,324 +77,71 @@ page 64055 "SSCW - Sales Invoice Lines"
                 field(dropShipment; rec."Drop Shipment") { }
                 field(genBusPostingGroup; rec."Gen. Bus. Posting Group") { }
                 field(genProdPostingGroup; rec."Gen. Prod. Posting Group") { }
-                field(vatCalculationType; rec."VAT Calculation Type")
-                {
-                }
-                field(transactionType; "Transaction Type")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Transaction Type', Locked = true;
-                }
-                field(transportMethod; "Transport Method")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Transport Method', Locked = true;
-                }
-                field(attachedToLineNumber; "Attached to Line No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Attached to Line No.', Locked = true;
-                }
-                field(exitPoint; "Exit Point")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Exit Point', Locked = true;
-                }
-                field("area"; Area)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Area', Locked = true;
-                }
-                field(transactionSpecification; "Transaction Specification")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Transaction Specification', Locked = true;
-                }
-                field(taxCategory; "Tax Category")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Tax Category', Locked = true;
-                }
-                field(taxAreaCode; "Tax Area Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Tax Area Code', Locked = true;
-                }
-                field(taxLiable; "Tax Liable")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Tax Liable', Locked = true;
-                }
-                field(taxGroupCode; "Tax Group Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Tax Group Code', Locked = true;
-                }
-                field(vatClauseCode; "VAT Clause Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Clause Code', Locked = true;
-                }
-                field(vatBusPostingGroup; "VAT Bus. Posting Group")
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Bus. Posting Group', Locked = true;
-                }
-                field(vatProdPostingGroup; "VAT Prod. Posting Group")
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Prod. Posting Group', Locked = true;
-                }
-                field(currencyCode; "Currency Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Currency Code', Locked = true;
-                }
-                field(outstandingAmountLcy; "Outstanding Amount (LCY)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Outstanding Amount (LCY)', Locked = true;
-                }
-                field(shippedNotInvoicedLcy; "Shipped Not Invoiced (LCY)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shipped Not Invoiced (LCY)', Locked = true;
-                }
-                field(shippedNotInvLcyNoVat; "Shipped Not Inv. (LCY) No VAT")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shipped Not Inv. (LCY) No VAT', Locked = true;
-                }
-                field(reservedQuantity; "Reserved Quantity")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Reserved Quantity', Locked = true;
-                }
-                field(reserve; Reserve)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Reserve', Locked = true;
-                }
-                field(blanketOrderNumber; "Blanket Order No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Blanket Order No.', Locked = true;
-                }
-                field(blanketOrderLineNumber; "Blanket Order Line No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Blanket Order Line No.', Locked = true;
-                }
-                field(vatBaseAmount; "VAT Base Amount")
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Base Amount', Locked = true;
-                }
-                field(unitCost; "Unit Cost")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Unit Cost', Locked = true;
-                }
-                field(systemCreatedEntry; "System-Created Entry")
-                {
-                    ApplicationArea = All;
-                    Caption = 'System-Created Entry', Locked = true;
-                }
-                field(lineAmount; "Line Amount")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Line Amount', Locked = true;
-                }
-                field(vatDifference; "VAT Difference")
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Difference', Locked = true;
-                }
-                field(invDiscAmountToInvoice; "Inv. Disc. Amount to Invoice")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Inv. Disc. Amount to Invoice', Locked = true;
-                }
-                field(vatIdentifier; "VAT Identifier")
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Identifier', Locked = true;
-                }
-                field(icPartnerRefType; "IC Partner Ref. Type")
-                {
-                    ApplicationArea = All;
-                    Caption = 'IC Partner Ref. Type', Locked = true;
-                }
-                field(icPartnerReference; "IC Partner Reference")
-                {
-                    ApplicationArea = All;
-                    Caption = 'IC Partner Reference', Locked = true;
-                }
-                field(prepaymentPercent; "Prepayment %")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment %', Locked = true;
-                }
-                field(prepmtLineAmount; "Prepmt. Line Amount")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. Line Amount', Locked = true;
-                }
-                field(prepmtAmtInv; "Prepmt. Amt. Inv.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. Amt. Inv.', Locked = true;
-                }
-                field(prepmtAmtInclVat; "Prepmt. Amt. Incl. VAT")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. Amt. Incl. VAT', Locked = true;
-                }
-                field(prepaymentAmount; "Prepayment Amount")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment Amount', Locked = true;
-                }
-                field(prepmtVatBaseAmt; "Prepmt. VAT Base Amt.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. VAT Base Amt.', Locked = true;
-                }
-                field(prepaymentVatPercent; "Prepayment VAT %")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment VAT %', Locked = true;
-                }
-                field(prepmtVatCalcType; "Prepmt. VAT Calc. Type")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. VAT Calc. Type', Locked = true;
-                }
-                field(prepaymentVatIdentifier; "Prepayment VAT Identifier")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment VAT Identifier', Locked = true;
-                }
-                field(prepaymentTaxAreaCode; "Prepayment Tax Area Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment Tax Area Code', Locked = true;
-                }
-                field(prepaymentTaxLiable; "Prepayment Tax Liable")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment Tax Liable', Locked = true;
-                }
-                field(prepaymentTaxGroupCode; "Prepayment Tax Group Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment Tax Group Code', Locked = true;
-                }
-                field(prepmtAmtToDeduct; "Prepmt Amt to Deduct")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt Amt to Deduct', Locked = true;
-                }
-                field(prepmtAmtDeducted; "Prepmt Amt Deducted")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt Amt Deducted', Locked = true;
-                }
-                field(prepaymentLine; "Prepayment Line")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment Line', Locked = true;
-                }
-                field(prepmtAmountInvInclVat; "Prepmt. Amount Inv. Incl. VAT")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. Amount Inv. Incl. VAT', Locked = true;
-                }
-                field(prepmtAmountInvLcy; "Prepmt. Amount Inv. (LCY)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. Amount Inv. (LCY)', Locked = true;
-                }
-                field(icPartnerCode; "IC Partner Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'IC Partner Code', Locked = true;
-                }
-                field(prepmtVatAmountInvLcy; "Prepmt. VAT Amount Inv. (LCY)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt. VAT Amount Inv. (LCY)', Locked = true;
-                }
-                field(prepaymentVatDifference; "Prepayment VAT Difference")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepayment VAT Difference', Locked = true;
-                }
-                field(prepmtVatDiffToDeduct; "Prepmt VAT Diff. to Deduct")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt VAT Diff. to Deduct', Locked = true;
-                }
-                field(prepmtVatDiffDeducted; "Prepmt VAT Diff. Deducted")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Prepmt VAT Diff. Deducted', Locked = true;
-                }
-                field(dimensionSetId; "Dimension Set ID")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Dimension Set ID', Locked = true;
-                }
-                field(qtyToAssembleToOrder; "Qty. to Assemble to Order")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. to Assemble to Order', Locked = true;
-                }
-                field(qtyToAsmToOrderBase; "Qty. to Asm. to Order (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. to Asm. to Order (Base)', Locked = true;
-                }
-                field(atoWhseOutstandingQty; "ATO Whse. Outstanding Qty.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'ATO Whse. Outstanding Qty.', Locked = true;
-                }
-                field(atoWhseOutstdQtyBase; "ATO Whse. Outstd. Qty. (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'ATO Whse. Outstd. Qty. (Base)', Locked = true;
-                }
-                field(jobTaskNumber; "Job Task No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Job Task No.', Locked = true;
-                }
-                field(jobContractEntryNumber; "Job Contract Entry No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Job Contract Entry No.', Locked = true;
-                }
-                field(postingDate; "Posting Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Posting Date', Locked = true;
-                }
-                field(deferralCode; "Deferral Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Deferral Code', Locked = true;
-                }
-                field(returnsDeferralStartDate; "Returns Deferral Start Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Returns Deferral Start Date', Locked = true;
-                }
-                field(variantCode; "Variant Code")
-                {
-                    ApplicationArea = Planning;
-                    Caption = 'Variant Code', Locked = true;
-                }
+                field(vatCalculationType; rec."VAT Calculation Type") { }
+                field(transactionType; Rec."Transaction Type") { }
+                field(transportMethod; Rec."Transport Method") { }
+                field(attachedToLineNumber; Rec."Attached to Line No.") { }
+                field(exitPoint; Rec."Exit Point") { }
+                field("area"; Rec."Area") { }
+                field(transactionSpecification; Rec."Transaction Specification") { }
+                field(taxCategory; Rec."Tax Category") { }
+                field(taxAreaCode; Rec."Tax Area Code") { }
+                field(taxLiable; Rec."Tax Liable") { }
+                field(taxGroupCode; Rec."Tax Group Code") { }
+                field(vatClauseCode; Rec."VAT Clause Code") { }
+                field(vatBusPostingGroup; Rec."VAT Bus. Posting Group") { }
+                field(vatProdPostingGroup; Rec."VAT Prod. Posting Group") { }
+                field(currencyCode; Rec."Currency Code") { }
+                field(outstandingAmountLcy; Rec."Outstanding Amount (LCY)") { }
+                field(shippedNotInvoicedLcy; Rec."Shipped Not Invoiced (LCY)") { }
+                field(shippedNotInvLcyNoVat; Rec."Shipped Not Inv. (LCY) No VAT") { }
+                field(reservedQuantity; Rec."Reserved Quantity") { }
+                field(reserve; Rec.Reserve) { }
+                field(blanketOrderNumber; Rec."Blanket Order No.") { }
+                field(blanketOrderLineNumber; Rec."Blanket Order Line No.") { }
+                field(vatBaseAmount; Rec."VAT Base Amount") { }
+                field(unitCost; Rec."Unit Cost") { }
+                field(systemCreatedEntry; Rec."System-Created Entry") { }
+                field(lineAmount; Rec."Line Amount") { }
+                field(vatDifference; Rec."VAT Difference") { }
+                field(invDiscAmountToInvoice; Rec."Inv. Disc. Amount to Invoice") { }
+                field(vatIdentifier; Rec."VAT Identifier") { }
+                field(icPartnerRefType; Rec."IC Partner Ref. Type") { }
+                field(icPartnerReference; Rec."IC Partner Reference") { }
+                field(prepaymentPercent; Rec."Prepayment %") { }
+                field(prepmtLineAmount; Rec."Prepmt. Line Amount") { }
+                field(prepmtAmtInv; Rec."Prepmt. Amt. Inv.") { }
+                field(prepmtAmtInclVat; Rec."Prepmt. Amt. Incl. VAT") { }
+                field(prepaymentAmount; Rec."Prepayment Amount") { }
+                field(prepmtVatBaseAmt; Rec."Prepmt. VAT Base Amt.") { }
+                field(prepaymentVatPercent; Rec."Prepayment VAT %") { }
+                field(prepmtVatCalcType; Rec."Prepmt. VAT Calc. Type") { }
+                field(prepaymentVatIdentifier; Rec."Prepayment VAT Identifier") { }
+                field(prepaymentTaxAreaCode; Rec."Prepayment Tax Area Code") { }
+                field(prepaymentTaxLiable; Rec."Prepayment Tax Liable") { }
+                field(prepaymentTaxGroupCode; Rec."Prepayment Tax Group Code") { }
+                field(prepmtAmtToDeduct; Rec."Prepmt Amt to Deduct") { }
+                field(prepmtAmtDeducted; Rec."Prepmt Amt Deducted") { }
+                field(prepaymentLine; Rec."Prepayment Line") { }
+                field(prepmtAmountInvInclVat; Rec."Prepmt. Amount Inv. Incl. VAT") { }
+                field(prepmtAmountInvLcy; Rec."Prepmt. Amount Inv. (LCY)") { }
+                field(icPartnerCode; Rec."IC Partner Code") { }
+                field(prepmtVatAmountInvLcy; Rec."Prepmt. VAT Amount Inv. (LCY)") { }
+                field(prepaymentVatDifference; Rec."Prepayment VAT Difference") { }
+                field(prepmtVatDiffToDeduct; Rec."Prepmt VAT Diff. to Deduct") { }
+                field(prepmtVatDiffDeducted; Rec."Prepmt VAT Diff. Deducted") { }
+                field(dimensionSetId; Rec."Dimension Set ID") { }
+                field(qtyToAssembleToOrder; Rec."Qty. to Assemble to Order") { }
+                field(qtyToAsmToOrderBase; Rec."Qty. to Asm. to Order (Base)") { }
+                field(atoWhseOutstandingQty; Rec."ATO Whse. Outstanding Qty.") { }
+                field(atoWhseOutstdQtyBase; Rec."ATO Whse. Outstd. Qty. (Base)") { }
+                field(jobTaskNumber; Rec."Job Task No.") { }
+                field(jobContractEntryNumber; Rec."Job Contract Entry No.") { }
+                field(postingDate; Rec."Posting Date") { }
+                field(deferralCode; Rec."Deferral Code") { }
+                field(returnsDeferralStartDate; Rec."Returns Deferral Start Date") { }
+                field(variantCode; Rec."Variant Code") { }
+                //custom bin code logic because ConnectWise api does not show if item is inventoriable or not.
                 field(binCode; BinCodeTxt)
                 {
                     trigger OnValidate()
@@ -407,295 +155,63 @@ page 64055 "SSCW - Sales Invoice Lines"
                             Rec."Bin Code" := '';
                     end;
                 }
-                field(qtyPerUnitOfMeasure; "Qty. per Unit of Measure")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. per Unit of Measure', Locked = true;
-                }
-                field(planned; Planned)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Planned', Locked = true;
-                }
-                field(unitOfMeasureCode; "Unit of Measure Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Unit of Measure Code', Locked = true;
-                }
-                field(quantityBase; "Quantity (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Quantity (Base)', Locked = true;
-                }
-                field(outstandingQtyBase; "Outstanding Qty. (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Outstanding Qty. (Base)', Locked = true;
-                }
-                field(qtyToInvoiceBase; "Qty. to Invoice (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. to Invoice (Base)', Locked = true;
-                }
-                field(qtyToShipBase; "Qty. to Ship (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. to Ship (Base)', Locked = true;
-                }
-                field(qtyShippedNotInvdBase; "Qty. Shipped Not Invd. (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. Shipped Not Invd. (Base)', Locked = true;
-                }
-                field(qtyShippedBase; "Qty. Shipped (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. Shipped (Base)', Locked = true;
-                }
-                field(qtyInvoicedBase; "Qty. Invoiced (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. Invoiced (Base)', Locked = true;
-                }
-                field(reservedQtyBase; "Reserved Qty. (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Reserved Qty. (Base)', Locked = true;
-                }
-                field(faPostingDate; "FA Posting Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'FA Posting Date', Locked = true;
-                }
-                field(depreciationBookCode; "Depreciation Book Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Depreciation Book Code', Locked = true;
-                }
-                field(deprUntilFaPostingDate; "Depr. until FA Posting Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Depr. until FA Posting Date', Locked = true;
-                }
-                field(duplicateInDepreciationBook; "Duplicate in Depreciation Book")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Duplicate in Depreciation Book', Locked = true;
-                }
-                field(useDuplicationList; "Use Duplication List")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Use Duplication List', Locked = true;
-                }
-                field(responsibilityCenter; "Responsibility Center")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Responsibility Center', Locked = true;
-                }
-                field(outOfStockSubstitution; "Out-of-Stock Substitution")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Out-of-Stock Substitution', Locked = true;
-                }
-                field(substitutionAvailable; "Substitution Available")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Substitution Available', Locked = true;
-                }
-                field(originallyOrderedNumber; "Originally Ordered No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Originally Ordered No.', Locked = true;
-                }
-                field(originallyOrderedVarCode; "Originally Ordered Var. Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Originally Ordered Var. Code', Locked = true;
-                }
-                field(itemReferenceNumber; "Item Reference No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Reference No.', Locked = true;
-                    Tooltip = 'Specifies item reference number.';
-                }
-                field(itemRefUnitOfMeasure; "Item Reference Unit of Measure")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Reference Unit of Measure', Locked = true;
-                    Tooltip = 'Specifies item reference unit of measure code.';
-                }
-                field(itemReferenceType; "Item Reference Type")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Reference Type', Locked = true;
-                    Tooltip = 'Specifies item reference type.';
-                }
-                field(itemReferenceTypeNumber; "Item Reference Type No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Reference Type No.', Locked = true;
-                    Tooltip = 'Specifies item reference type number.';
-                }
-                field(itemCategoryCode; "Item Category Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Category Code', Locked = true;
-                }
-                field(nonstock; Nonstock)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Catalog', Locked = true;
-                }
-                field(purchasingCode; "Purchasing Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Purchasing Code', Locked = true;
-                }
-                field(specialOrder; "Special Order")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Special Order', Locked = true;
-                }
-                field(specialOrderPurchaseNumber; "Special Order Purchase No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Special Order Purchase No.', Locked = true;
-                }
-                field(specialOrderPurchLineNumber; "Special Order Purch. Line No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Special Order Purch. Line No.', Locked = true;
-                }
-                field(whseOutstandingQty; "Whse. Outstanding Qty.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Whse. Outstanding Qty.', Locked = true;
-                }
-                field(whseOutstandingQtyBase; "Whse. Outstanding Qty. (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Whse. Outstanding Qty. (Base)', Locked = true;
-                }
-                field(completelyShipped; "Completely Shipped")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Completely Shipped', Locked = true;
-                }
-                field(requestedDeliveryDate; "Requested Delivery Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Requested Delivery Date', Locked = true;
-                }
-                field(promisedDeliveryDate; "Promised Delivery Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Promised Delivery Date', Locked = true;
-                }
-                field(shippingTime; "Shipping Time")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shipping Time', Locked = true;
-                }
-                field(outboundWhseHandlingTime; "Outbound Whse. Handling Time")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Outbound Whse. Handling Time', Locked = true;
-                }
-                field(plannedDeliveryDate; "Planned Delivery Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Planned Delivery Date', Locked = true;
-                }
-                field(plannedShipmentDate; "Planned Shipment Date")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Planned Shipment Date', Locked = true;
-                }
-                field(shippingAgentCode; "Shipping Agent Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shipping Agent Code', Locked = true;
-                }
-                field(shippingAgentServiceCode; "Shipping Agent Service Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shipping Agent Service Code', Locked = true;
-                }
-                field(allowItemChargeAssignment; "Allow Item Charge Assignment")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Allow Item Charge Assignment', Locked = true;
-                }
-                field(qtyToAssign; "Qty. to Assign")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. to Assign', Locked = true;
-                }
-                field(qtyAssigned; Rec."Qty. Assigned")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Qty. Assigned', Locked = true;
-                }
-                field(returnQtyToReceive; Rec."Return Qty. to Receive")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Qty. to Receive', Locked = true;
-                }
-                field(returnQtyToReceiveBase; Rec."Return Qty. to Receive (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Qty. to Receive (Base)', Locked = true;
-                }
-                field(returnQtyRcdNotInvd; Rec."Return Qty. Rcd. Not Invd.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Qty. Rcd. Not Invd.', Locked = true;
-                }
-                field(retQtyRcdNotInvdBase; Rec."Ret. Qty. Rcd. Not Invd.(Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Ret. Qty. Rcd. Not Invd.(Base)', Locked = true;
-                }
-                field(returnRcdNotInvd; Rec."Return Rcd. Not Invd.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Rcd. Not Invd.', Locked = true;
-                }
-                field(returnRcdNotInvdLcy; Rec."Return Rcd. Not Invd. (LCY)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Rcd. Not Invd. (LCY)', Locked = true;
-                }
-                field(returnQtyReceived; Rec."Return Qty. Received")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Qty. Received', Locked = true;
-                }
-                field(returnQtyReceivedBase; Rec."Return Qty. Received (Base)")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Qty. Received (Base)', Locked = true;
-                }
-                field(applFromItemEntry; Rec."Appl.-from Item Entry")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Appl.-from Item Entry', Locked = true;
-                }
-                field(bomItemNumber; Rec."BOM Item No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'BOM Item No.', Locked = true;
-                }
-                field(returnReceiptNumber; Rec."Return Receipt No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Receipt No.', Locked = true;
-                }
-                field(returnReceiptLineNumber; Rec."Return Receipt Line No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Return Receipt Line No.', Locked = true;
-                }
+                field(qtyPerUnitOfMeasure; Rec."Qty. per Unit of Measure") { }
+                field(planned; Rec.Planned) { }
+                field(unitOfMeasureCode; Rec."Unit of Measure Code") { }
+                field(quantityBase; Rec."Quantity (Base)") { }
+                field(outstandingQtyBase; Rec."Outstanding Qty. (Base)") { }
+                field(qtyToInvoiceBase; Rec."Qty. to Invoice (Base)") { }
+                field(qtyToShipBase; Rec."Qty. to Ship (Base)") { }
+                field(qtyShippedNotInvdBase; Rec."Qty. Shipped Not Invd. (Base)") { }
+                field(qtyShippedBase; Rec."Qty. Shipped (Base)") { }
+                field(qtyInvoicedBase; Rec."Qty. Invoiced (Base)") { }
+                field(reservedQtyBase; Rec."Reserved Qty. (Base)") { }
+                field(faPostingDate; Rec."FA Posting Date") { }
+                field(depreciationBookCode; Rec."Depreciation Book Code") { }
+                field(deprUntilFaPostingDate; Rec."Depr. until FA Posting Date") { }
+                field(duplicateInDepreciationBook; Rec."Duplicate in Depreciation Book") { }
+                field(useDuplicationList; Rec."Use Duplication List") { }
+                field(responsibilityCenter; Rec."Responsibility Center") { }
+                field(outOfStockSubstitution; Rec."Out-of-Stock Substitution") { }
+                field(substitutionAvailable; Rec."Substitution Available") { }
+                field(originallyOrderedNumber; Rec."Originally Ordered No.") { }
+                field(originallyOrderedVarCode; Rec."Originally Ordered Var. Code") { }
+                field(itemReferenceNumber; Rec."Item Reference No.") { }
+                field(itemRefUnitOfMeasure; Rec."Item Reference Unit of Measure") { }
+                field(itemReferenceType; Rec."Item Reference Type") { }
+                field(itemReferenceTypeNumber; Rec."Item Reference Type No.") { }
+                field(itemCategoryCode; Rec."Item Category Code") { }
+                field(nonstock; Rec.Nonstock) { }
+                field(purchasingCode; Rec."Purchasing Code") { }
+                field(specialOrder; Rec."Special Order") { }
+                field(specialOrderPurchaseNumber; Rec."Special Order Purchase No.") { }
+                field(specialOrderPurchLineNumber; Rec."Special Order Purch. Line No.") { }
+                field(whseOutstandingQty; Rec."Whse. Outstanding Qty.") { }
+                field(whseOutstandingQtyBase; Rec."Whse. Outstanding Qty. (Base)") { }
+                field(completelyShipped; Rec."Completely Shipped") { }
+                field(requestedDeliveryDate; Rec."Requested Delivery Date") { }
+                field(promisedDeliveryDate; Rec."Promised Delivery Date") { }
+                field(shippingTime; Rec."Shipping Time") { }
+                field(outboundWhseHandlingTime; Rec."Outbound Whse. Handling Time") { }
+                field(plannedDeliveryDate; Rec."Planned Delivery Date") { }
+                field(plannedShipmentDate; Rec."Planned Shipment Date") { }
+                field(shippingAgentCode; Rec."Shipping Agent Code") { }
+                field(shippingAgentServiceCode; Rec."Shipping Agent Service Code") { }
+                field(allowItemChargeAssignment; Rec."Allow Item Charge Assignment") { }
+                field(qtyToAssign; Rec."Qty. to Assign") { }
+                field(qtyAssigned; Rec."Qty. Assigned") { }
+                field(returnQtyToReceive; Rec."Return Qty. to Receive") { }
+                field(returnQtyToReceiveBase; Rec."Return Qty. to Receive (Base)") { }
+                field(returnQtyRcdNotInvd; Rec."Return Qty. Rcd. Not Invd.") { }
+                field(retQtyRcdNotInvdBase; Rec."Ret. Qty. Rcd. Not Invd.(Base)") { }
+                field(returnRcdNotInvd; Rec."Return Rcd. Not Invd.") { }
+                field(returnRcdNotInvdLcy; Rec."Return Rcd. Not Invd. (LCY)") { }
+                field(returnQtyReceived; Rec."Return Qty. Received") { }
+                field(returnQtyReceivedBase; Rec."Return Qty. Received (Base)") { }
+                field(applFromItemEntry; Rec."Appl.-from Item Entry") { }
+                field(bomItemNumber; Rec."BOM Item No.") { }
+                field(returnReceiptNumber; Rec."Return Receipt No.") { }
+                field(returnReceiptLineNumber; Rec."Return Receipt Line No.") { }
                 field(returnReasonCode; Rec."Return Reason Code") { }
                 field(allowLineDisc; Rec."Allow Line Disc.") { }
                 field(customerDiscGroup; Rec."Customer Disc. Group") { }
@@ -751,3 +267,5 @@ page 64055 "SSCW - Sales Invoice Lines"
         exit(false);
     end;
 }
+
+#pragma implicitwith restore

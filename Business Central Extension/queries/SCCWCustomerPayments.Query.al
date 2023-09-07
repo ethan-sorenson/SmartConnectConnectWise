@@ -1,5 +1,6 @@
+//query of customer payments. 
+//Use date filer on SystemCreatedAt for only recently posted payments
 query 64051 CustomerPayments
-
 {
     QueryType = API;
     APIPublisher = 'eOneSolutions';

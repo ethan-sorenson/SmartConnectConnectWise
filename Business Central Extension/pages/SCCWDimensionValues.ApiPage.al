@@ -1,4 +1,4 @@
-page 64051 SCCWDimensionValues
+page 64051 "SCCW - DimensionValues"
 {
     PageType = API;
     Caption = 'SCCWDimensionValues';

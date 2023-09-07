@@ -1,4 +1,4 @@
-tableextension 64066 SCCWItemLendgerEntryTable extends "Item Ledger Entry"
+tableextension 64066 SCCWItemLedgerEntryTable extends "Item Ledger Entry"
 
 {
     fields
