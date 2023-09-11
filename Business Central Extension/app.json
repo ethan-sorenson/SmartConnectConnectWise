@@ -1,0 +1,37 @@
+{
+    "id": "9ddb0ffd-96ee-4e7b-9629-e7b616781428",
+    "name": "SmartConnect ConnectWise Extension",
+    "publisher": "eOne Solutions",
+    "version": "1.0.0.8",
+    "brief": "The SmartConnect ConnectWise Extension adds custom fields to store ConnectWise ids",
+    "description": "Used with eOne SmartConnect to integrate ConnectWise data in and out of Business Central",
+    "privacyStatement": "",
+    "EULA": "",
+    "help": "",
+    "url": "",
+    "logo": "",
+    "dependencies": [
+        {
+            "id": "10cb69d9-bc8a-4d27-970a-9e110e9db2a5",
+            "name": "_Exclude_APIV2_",
+            "publisher": "Microsoft",
+            "version": "21.1.0.0"
+          }
+    ],
+    "screenshots": [],
+    "platform": "21.0.0.0",
+    "application": "21.0.0.0",
+    "idRanges": [
+        {
+            "from": 64051,
+            "to": 64100
+        }
+    ],
+    "contextSensitiveHelpUrl": "https://SmartConnectConnectWise.com/help/",
+    "resourceExposurePolicy": {
+        "allowDebugging": true,
+        "allowDownloadingSource": true,
+        "includeSourceInSymbolFile": true
+    },
+    "runtime": "10.0"
+}
