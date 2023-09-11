@@ -16,7 +16,8 @@ flowchart TD
     unposted procurements"| cw1
     B(PURCHASES_02_CW_BC) -->|"Import Purchase
      Invoice"| cw2 --> C
-    C(PURCHASES_03_CW_BC) --> |"Writeback successfully
+    C(PURCHASES_03_CW_BC) --> |"Retrieve tax line ids"| D
+    D(PURCHASES_04_CW_BC) --> |"Writeback successfully
     imported records"| cw1
     cw1[/CW Procurements\]
     cw2[\BC Purchase Invoice/]
