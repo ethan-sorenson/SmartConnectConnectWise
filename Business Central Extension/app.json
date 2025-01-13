@@ -2,7 +2,7 @@
     "id": "9ddb0ffd-96ee-4e7b-9629-e7b616781428",
     "name": "SmartConnect ConnectWise Extension",
     "publisher": "eOne Solutions",
-    "version": "1.0.0.9",
+    "version": "1.0.0.10",
     "brief": "The SmartConnect ConnectWise Extension adds custom fields to store ConnectWise ids",
     "description": "Used with eOne SmartConnect to integrate ConnectWise data in and out of Business Central",
     "privacyStatement": "",

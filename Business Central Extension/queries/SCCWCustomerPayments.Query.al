@@ -21,7 +21,7 @@ query 64051 CustomerPayments
             column(PaymentCreatedAt; SystemCreatedAt) { }
             dataitem(custLedgerEntry; "Cust. Ledger Entry")
             {
-                DataItemLink = "Entry No." = Payment."Cust. Ledger Entry No.";
+                DataItemLink = "Entry No." = Payment."Applied Cust. Ledger Entry No.";
                 SqlJoinType = InnerJoin;
                 column(paymentDocumentDate; "Document Date") { }
                 dataitem(Invoice; "Detailed Cust. Ledg. Entry")
